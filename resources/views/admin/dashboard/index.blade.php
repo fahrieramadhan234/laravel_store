@@ -1,68 +1,92 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-aqua">
-                <div class="inner">
-                    <h3>{{$products->count()}}</h3>
-                    <p>Total Products</p>
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Dashboard</h4>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="/admin/products" class="small-box-footer">More info <i
-                        class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-green">
-                <div class="inner">
-                    <h3>{{$brands->count()}}</h3>
+            <div class="row">
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-primary border-primary border">
+                                    <i class="fe-archive font-22 avatar-title text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="mt-1"><span data-plugin="counterup">{{$products->count()}}</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Total Products</p>
+                                </div>
+                            </div>
+                        </div> <!-- end row-->
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
 
-                    <p>Total Brands</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-pricetags"></i>
-                </div>
-                <a href="/admin/brands" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>44</h3>
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                                    <i class="fe-shopping-cart font-22 avatar-title text-success"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">{{$brands->count()}}</span>
+                                    </h3>
+                                    <p class="text-muted mb-1 text-truncate">Total Brands</p>
+                                </div>
+                            </div>
+                        </div> <!-- end row-->
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
 
-                    <p>User Registrations</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-red">
-                <div class="inner">
-                    <h3>65</h3>
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-info border-info border">
+                                    <i class="fe-bar-chart-line- font-22 avatar-title text-info"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="text-dark mt-1"><span
+                                            data-plugin="counterup">{{$categories->count()}}</span></h3>
+                                    <p class="text-muted mb-1 text-truncate">Total Categories</p>
+                                </div>
+                            </div>
+                        </div> <!-- end row-->
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
 
-                    <p>Unique Visitors</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
+                                    <i class="fe-eye font-22 avatar-title text-warning"></i>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">78.41</span>k</h3>
+                                    <p class="text-muted mb-1 text-truncate">Today's Visits</p>
+                                </div>
+                            </div>
+                        </div> <!-- end row-->
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
             </div>
         </div>
-        <!-- ./col -->
     </div>
 </div>
 @endsection

@@ -1,63 +1,47 @@
-<aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-            <div class="pull-left image">
-                <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-            </div>
-            <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-        </div>
-        <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
-                            class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
-        </form>
-        <!-- /.search form -->
-        <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="">
-                <a href="/admin/dashboard">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
-            </li>
+<div class="left-side-menu">
+    <div class="h-100" data-simplebar>
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <ul id="side-menu">
+                <li class="menu-title">Navigation</li>
+                <li>
+                    <a href="/admin/dashboard">
+                        <i data-feather="airplay"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
 
-            <li class="active treeview">
-                <a href="#">
-                    <i class="fa fa-dropbox"></i> <span>Products</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="">
-                        <a href="/admin/products">
-                            <i class="fa fa-circle-o"></i> <span>Products List</span> </a>
-                    </li>
-                    <li class="">
-                        <a href="/admin/brands">
-                            <i class="fa fa-circle-o"></i> <span>Brands</span> </a>
-                    </li>
-                    <li class="">
-                        <a href="/admin/categories">
-                            <i class="fa fa-circle-o"></i> <span>Categories</span> </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="">
-                <a href="/admin/products">
-                    <i class="fa fa-shopping-cart"></i> <span>Order List</span> </a>
-            </li>
-        </ul>
-    </section>
-    <!-- /.sidebar -->
-</aside>
+                <li class="menu-title mt-2">Apps</li>
+                <li>
+                    <a href="#sidebarMultilevel" data-toggle="collapse">
+                        <i data-feather="archive"></i>
+                        <span> Products </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarMultilevel">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="/admin/products">
+                                    Data Products
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/brands">
+                                    Data Brands
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/categories">
+                                    Data Categories
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- End Sidebar -->
+        <div class="clearfix"></div>
+    </div>
+    <!-- Sidebar -left -->
+</div>

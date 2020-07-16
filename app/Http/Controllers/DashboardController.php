@@ -11,6 +11,7 @@ class DashboardController extends Controller
     {
         $products = \App\Models\Products::all();
         $brands = \App\Models\Brands::all();
-        return view('admin.dashboard.index', ['products' => $products, 'brands' => $brands]);
+        $categories = \App\Models\Categories::all();
+        return view('admin.dashboard.index', ['products' => $products, 'brands' => $brands, 'categories' => $categories]);
     }
 }

@@ -1,86 +1,114 @@
 @extends('admin.layouts.master')
 
 @section('header')
-<link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+<link href="{{asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{asset('backend/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}"
+    rel="stylesheet" type="text/css" />
+<link href="{{asset('backend/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{asset('backend/assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css')}}" rel="stylesheet"
+    type="text/css" />
 @endsection
 
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <div class="col-6">
-                        <h3 class="box-title">Data Products</h3>
-                    </div>
-                    <div class="col-6 pull-right">
-                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Data</a>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="myTable" class="table table-bordered table-striped dataTable" role="grid"
-                                    aria-describedby="example1_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 30px;">No</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 300px;">Brand Logo</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 300px;">Brand Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                                style="width: 125px;">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $no=1; ?>
-                                        @foreach ($brands as $b)
-                                        <tr role="row" class="odd">
-                                            <td><?= $no; ?></td>
-                                            <td><img src="{{$b->getLogo()}}" style="width: 150px; height:50px"></td>
-                                            <td>{{$b->brand_name}}</td>
-                                            <td>
-                                                <a href="/admin/brand/edit/{{$b->brand_id}}"
-                                                    class="btn btn-warning btn-sm">Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm delete"
-                                                    brand-id="{{$b->brand_id}}"
-                                                    brand-name="{{$b->brand_name}}">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        <?php $no++; ?>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Datatables</li>
+                            </ol>
                         </div>
+                        <h4 class="page-title">Datatables</h4>
                     </div>
                 </div>
-                <!-- /.box-body -->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-lg-8">
+                                    <h3 class="box-title">Data Products</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-lg-right">
+                                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i
+                                                class="mdi mdi-plus-circle mr-1"></i>Add
+                                            Data</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="myTable"
+                                            class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                            role="grid" aria-describedby="basic-datatable_info" style="width: 1561px;">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Rendering engine: activate to sort column descending"
+                                                        style="width: 30px;">No</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Rendering engine: activate to sort column descending"
+                                                        style="width: 300px;">Brand Logo</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Rendering engine: activate to sort column descending"
+                                                        style="width: 300px;">Brand Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="CSS grade: activate to sort column ascending"
+                                                        style="width: 125px;">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no=1; ?>
+                                                @foreach ($brands as $b)
+                                                <tr role="row" class="odd">
+                                                    <td><?= $no; ?></td>
+                                                    <td><img src="{{$b->getLogo()}}" style="width: 150px; height:50px">
+                                                    </td>
+                                                    <td>{{$b->brand_name}}</td>
+                                                    <td>
+                                                        <a href="/admin/brand/edit/{{$b->brand_id}}"
+                                                            class="btn btn-warning btn-sm">Edit</a>
+                                                        <a href="#" class="btn btn-danger btn-sm delete"
+                                                            brand-id="{{$b->brand_id}}"
+                                                            brand-name="{{$b->brand_name}}">Hapus</a>
+                                                    </td>
+                                                </tr>
+                                                <?php $no++; ?>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div><!-- end col-->
             </div>
         </div>
     </div>
 </div>
 
-@endsection
-
-<div class="modal fade" id="myModal" style="display: none;">
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
+    style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Default Modal</h4>
+                <h4 class="modal-title" id="standard-modalLabel">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form role="form" action="/admin/brand/create" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -92,7 +120,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Logo</label>
-                            <input name="brand_logo" type="file" id="exampleInputFile">
+                            <input name="brand_logo" type="file" id="exampleInputFile" class="form-control-file">
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -102,33 +130,46 @@
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
+@endsection
+
 @section('footer')
-<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="{{asset('backend/assets/js/pages/datatables.init.js')}}"></script>
 <script>
     $(document).ready( function () {
         $('.delete').click(function(){
             var id = $(this).attr('brand-id');
             var name = $(this).attr('brand-name');
-            swal({
-            title: "Delete data?",
-            text: "Are you sure want to delete this brand ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure want to delete this brand ?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
             })
-            .then((willDelete) => {
-                console.log(willDelete);
-                if (willDelete) {
-                    window.location = "/admin/brand/delete/"+id;
-                } 
-            });
+            .then((result) => {
+                if (result.value) {
+                    window.location = "/admin/brands/delete/"+id;
+                }
+            })
         });
         $('#myTable').DataTable();
         $('.datepicker').datepicker({
@@ -139,17 +180,16 @@
 </script>
 <script>
     @if (Session::has('Success'))
-        swal({
-            title: "Success!",
-            text: "{{Session::get('Success')}}",
-            icon: "success",
-            button: "Close!",
-        });
+        Swal.fire(
+            'Success!',
+            "{{Session::get('Success')}}",
+            'success'
+        )
     @elseif (Session::has('Error'))
-        swal({
+        Swal.fire({
             title: "Error!",
             text: "{{Session::get('Error')}}",
-            icon: "error",
+            type: "error",
             button: "Close!",
         });
     @endif

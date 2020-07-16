@@ -1,104 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Log in</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('backend/bower_components/font-awesome/css/font-awesome.min.css')}}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{asset('backend/bower_components/Ionicons/css/ionicons.min.css')}}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('backend/dist/css/AdminLTE.min.css')}}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{asset('backend/plugins/iCheck/square/blue.css')}}">
+    <meta charset="utf-8" />
+    <title>Log In | UBold - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- App css -->
+    <link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"
+        id="bs-default-stylesheet" />
+    <link href="{{asset('backend/assets/css/app.min.css')}}" rel="stylesheet" type="text/css"
+        id="app-default-stylesheet" />
 
-    <!-- Google Font -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="{{asset('backend/assets/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css"
+        id="bs-dark-stylesheet" disabled />
+    <link href="{{asset('backend/assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css"
+        id="app-dark-stylesheet" disabled />
+
+    <!-- icons -->
+    <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+
 </head>
 
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+<body class="authentication-bg authentication-bg-pattern">
 
-            <form action="/admin/postlogin" method="post">
-                {{ csrf_field() }}
-                <div class="form-group has-feedback">
-                    <input type="email" name="email" class="form-control" placeholder="Email">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox"> Remember Me
-                            </label>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-pattern">
 
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign
-                    in using
-                    Facebook</a>
-                <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign
-                    in using
-                    Google+</a>
+                        <div class="card-body p-4">
+
+                            <div class="text-center w-75 m-auto">
+                                <div class="auth-logo">
+                                    <a href="index.html" class="logo logo-dark text-center">
+                                        <span class="logo-lg">
+                                            <img src="{{asset('backend/assets/images/logo-dark.png')}}" alt=""
+                                                height="22">
+                                        </span>
+                                    </a>
+
+                                    <a href="index.html" class="logo logo-light text-center">
+                                        <span class="logo-lg">
+                                            <img src="{{asset('backend/assets/images/logo-light.png')}}" alt=""
+                                                height="22">
+                                        </span>
+                                    </a>
+                                </div>
+                                <p class="text-muted mb-4 mt-3">Enter your email address and password to access admin
+                                    panel.</p>
+                            </div>
+
+                            <form action="/admin/postlogin" method="post">
+                                {{ csrf_field() }}
+                                <div class="form-group mb-3">
+                                    <label for="emailaddress">Email address</label>
+                                    <input name="email" class="form-control" type="email" id="emailaddress" required=""
+                                        placeholder="Enter your email">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="password">Password</label>
+                                    <div class="input-group input-group-merge">
+                                        <input name="password" type="password" id="password" class="form-control"
+                                            placeholder="Enter your password">
+                                        <div class="input-group-append" data-password="false">
+                                            <div class="input-group-text">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkbox-signin"
+                                            checked>
+                                        <label class="custom-control-label" for="checkbox-signin">Remember me</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-0 text-center">
+                                    <button class="btn btn-primary btn-block" type="submit"> Log In </button>
+                                </div>
+
+                            </form>
+
+                            <div class="text-center">
+                                <h5 class="mt-3 text-muted">Sign in with</h5>
+                                <ul class="social-list list-inline mt-3 mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="javascript: void(0);"
+                                            class="social-list-item border-primary text-primary"><i
+                                                class="mdi mdi-facebook"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="javascript: void(0);"
+                                            class="social-list-item border-danger text-danger"><i
+                                                class="mdi mdi-google"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="javascript: void(0);" class="social-list-item border-info text-info"><i
+                                                class="mdi mdi-twitter"></i></a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="javascript: void(0);"
+                                            class="social-list-item border-secondary text-secondary"><i
+                                                class="mdi mdi-github"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p> <a href="auth-recoverpw.html" class="text-white-50 ml-1">Forgot your password?</a></p>
+                            <p class="text-white-50">Don't have an account? <a href="auth-register.html"
+                                    class="text-white ml-1"><b>Sign Up</b></a></p>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div> <!-- end col -->
             </div>
-            <!-- /.social-auth-links -->
-
-            <a href="#">I forgot my password</a><br>
-            <a href="register.html" class="text-center">Register a new membership</a>
-
+            <!-- end row -->
         </div>
-        <!-- /.login-box-body -->
+        <!-- end container -->
     </div>
-    <!-- /.login-box -->
+    <!-- end page -->
 
-    <!-- jQuery 3 -->
-    <script src="{{asset('backend/bower_components/jquery/dist/jquery.min.js')}}"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="{{asset('backend/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <!-- iCheck -->
-    <script src="{{asset('backend/plugins/iCheck/icheck.min.js')}}"></script>
-    <script src="{{asset('backend/sweetalert.min.js')}}"></script>
+
+    <footer class="footer footer-alt">
+        2015 - <script>
+            document.write(new Date().getFullYear())
+        </script> &copy; UBold theme by <a href="" class="text-white-50">Coderthemes</a>
+    </footer>
+
+    <!-- Vendor js -->
+    <script src="{{asset('backend/assets/js/vendor.min.js')}}"></script>
+
+    <!-- App js -->
+    <script src="{{asset('backend/assets/js/app.min.js')}}"></script>
     <script>
-        $(function () {
-            $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
-            });
-        });
         @if (Session::has('error'))
             swal({
                 title: "Error!",
@@ -108,6 +160,7 @@
             });
         @endif
     </script>
+
 </body>
 
 </html>

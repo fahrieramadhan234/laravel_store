@@ -1,98 +1,140 @@
 @extends('admin.layouts.master')
 
 @section('header')
-<link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+<link href="{{asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{asset('backend/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}"
+    rel="stylesheet" type="text/css" />
+<link href="{{asset('backend/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet"
+    type="text/css" />
+<link href="{{asset('backend/assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css')}}" rel="stylesheet"
+    type="text/css" />
 @endsection
 
 @section('content')
-<div class="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <div class="col-6">
-                        <h3 class="box-title">Data Products</h3>
-                    </div>
-                    <div class="col-6 pull-right">
-                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Data</a>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="myTable" class="table table-bordered table-striped dataTable" role="grid"
-                                    aria-describedby="example1_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 30px;">No</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 300px;">Product Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                style="width: 246px;">Brand</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                style="width: 246px;">Category</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                                style="width: 219px;">Price</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Engine version: activate to sort column ascending"
-                                                style="width: 172px;">Stock</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                                style="width: 125px;">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $no=1; ?>
-                                        @foreach ($products as $p)
-                                        <tr role="row" class="odd">
-                                            <td><?= $no; ?></td>
-                                            <td><a
-                                                    href="/admin/product/detail/{{$p->product_id}}">{{$p->product_name}}</a>
-                                            </td>
-                                            <td>{{$p->brands->brand_name}}</td>
-                                            <td>{{$p->categories->category_name}}</td>
-                                            <td>Rp. {{number_format($p->product_price)}}</td>
-                                            <td>{{$p->product_stock}}</td>
-                                            <td>
-                                                <a href="/admin/product/edit/{{$p->product_id}}"
-                                                    class="btn btn-warning btn-sm">Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm delete"
-                                                    product-id="{{$p->product_id}}"
-                                                    product-name="{{$p->product_name}}">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        <?php $no++; ?>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                <li class="breadcrumb-item active">Datatables</li>
+                            </ol>
                         </div>
+                        <h4 class="page-title">Datatables</h4>
                     </div>
                 </div>
-                <!-- /.box-body -->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-lg-8">
+                                    <h3 class="box-title">Data Products</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="text-lg-right">
+                                        <div class="dt-buttons btn-group flex-wrap mr-2"> <button
+                                                class="btn btn-secondary buttons-copy buttons-html5 btn-light"
+                                                tabindex="0" aria-controls="datatable-buttons"
+                                                type="button"><span>Copy</span></button> <button
+                                                class="btn btn-secondary buttons-print btn-light" tabindex="0"
+                                                aria-controls="datatable-buttons"
+                                                type="button"><span>Print</span></button> <button
+                                                class="btn btn-secondary buttons-pdf buttons-html5 btn-light"
+                                                tabindex="0" aria-controls="datatable-buttons"
+                                                type="button"><span>PDF</span></button> </div>
+                                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i
+                                                class="mdi mdi-plus-circle mr-1"></i>Add
+                                            Data</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="datatable-buttons_wrapper"
+                                            class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                            role="grid" aria-describedby="basic-datatable_info" style="width: 1561px;">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Rendering engine: activate to sort column descending"
+                                                        style="width: 30px;">No</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Rendering engine: activate to sort column descending"
+                                                        style="width: 300px;">Product Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Browser: activate to sort column ascending"
+                                                        style="width: 246px;">Brand</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Browser: activate to sort column ascending"
+                                                        style="width: 246px;">Category</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Platform(s): activate to sort column ascending"
+                                                        style="width: 219px;">Price</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Engine version: activate to sort column ascending"
+                                                        style="width: 172px;">Stock</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="CSS grade: activate to sort column ascending"
+                                                        style="width: 125px;">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no=1; ?>
+                                                @foreach ($products as $p)
+                                                <tr role="row" class="odd">
+                                                    <td><?= $no; ?></td>
+                                                    <td><a
+                                                            href="/admin/product/detail/{{$p->product_id}}">{{$p->product_name}}</a>
+                                                    </td>
+                                                    <td>{{$p->brands->brand_name}}</td>
+                                                    <td>{{$p->categories->category_name}}</td>
+                                                    <td>Rp. {{number_format($p->product_price)}}</td>
+                                                    <td>{{$p->product_stock}}</td>
+                                                    <td>
+                                                        <a href="/admin/product/edit/{{$p->product_id}}"
+                                                            class="btn btn-warning btn-sm">Edit</a>
+                                                        <a href="#" class="btn btn-danger btn-sm delete"
+                                                            product-id="{{$p->product_id}}"
+                                                            product-name="{{$p->product_name}}">Hapus</a>
+                                                    </td>
+                                                </tr>
+                                                <?php $no++; ?>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div><!-- end col-->
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="myModal" style="display: none;">
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
+    style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Default Modal</h4>
+                <h4 class="modal-title" id="standard-modalLabel">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form role="form" action="/admin/product/create" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -134,7 +176,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Pict</label>
-                            <input name="product_pict" type="file" id="exampleInputFile">
+                            <input name="product_pict" type="file" id="exampleInputFile" class="form-control-file">
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -144,57 +186,48 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
+
 @endsection
 
 @section('footer')
-<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/datatables.net-select/js/dataTables.select.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+<script src="{{asset('backend/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="{{asset('backend/assets/js/pages/datatables.init.js')}}"></script>
 <script>
     $(document).ready( function () {
         $('.delete').click(function(){
             var id = $(this).attr('product-id');
             var name = $(this).attr('product-name');
-            swal({
-            title: "Delete data?",
-            text: "Are you sure want to delete this product ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure want to delete this product ?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
             })
-            .then((willDelete) => {
-                console.log(willDelete);
-                if (willDelete) {
-                    window.location = "/admin/product/delete/"+id;
-                } 
-            });
+            .then((result) => {
+                if (result.value) {
+                    window.location = "/admin/categories/product/"+id;
+                }
+            })
         });
-        $('#myTable').DataTable(
-            {
-                // "language" : {
-                //     "sEmptyTable":   "Tidak ada data yang tersedia pada tabel ini",
-                //     "sProcessing":   "Sedang memproses...",
-                //     "sLengthMenu":   "Tampilkan _MENU_ entri",
-                //     "sZeroRecords":  "Tidak ditemukan data yang sesuai",
-                //     "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-                //     "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
-                //     "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-                //     "sInfoPostFix":  "",
-                //     "sSearch":       "Cari:",
-                //     "sUrl":          "",
-                //     "oPaginate": {
-                //         "sFirst":    "Pertama",
-                //         "sPrevious": "Sebelumnya",
-                //         "sNext":     "Selanjutnya",
-                //         "sLast":     "Terakhir"
-                //     }
-                // }
-            }
-        );
+        $('#datatable-buttons_wrapper').DataTable();
         $('.datepicker').datepicker({
             autoclose: true,
             format:'yyyy-mm-dd'
@@ -203,10 +236,16 @@
 </script>
 <script>
     @if (Session::has('Success'))
-        swal({
-            title: "Success!",
-            text: "{{Session::get('Success')}}",
-            icon: "success",
+        Swal.fire(
+            'Success!',
+            "{{Session::get('Success')}}",
+            'success'
+        )
+    @elseif (Session::has('Error'))
+        Swal.fire({
+            title: "Error!",
+            text: "{{Session::get('Error')}}",
+            type: "error",
             button: "Close!",
         });
     @endif
