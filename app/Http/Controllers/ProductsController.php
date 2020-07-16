@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Brands;
 use App\Models\Categories;
+use illuminate\Support\Facades\File;
 
 class ProductsController extends Controller
 {
@@ -19,13 +21,12 @@ class ProductsController extends Controller
 
     public function create(Request $request)
     {
-        // dd($request->all());
-
         $product = Products::create($request->all());
-        if ($request->hasFile('pict')) {
+        if ($request->hasFile('product_pict')) {
             $pict = $request->file('product_pict');
-            $pict_name = time() . '-' . $request->file('product_pict')->getClientOriginalName();
-            $pict->move('backend/product_image/', $pict_name);
+            $slug = Str::slug($request->product_name) . "." . $pict->getClientOriginalExtension();
+            $pict_name = time() . '-' . $slug;
+            $pict->move('backend/images/products_image/', $pict_name);
             $product->product_pict = $pict_name;
             $product->save();
         }
@@ -47,10 +48,11 @@ class ProductsController extends Controller
         $product = Products::find($id);
         $product->update($request->all());
         // dd($request->$pict_name);
-        if ($request->hasFile('product_pict')) {
+        if ($request->hasFile('pict')) {
             $pict = $request->file('product_pict');
-            $pict_name = $pict->getClientOriginalName();
-            $pict->move('backend/images/products_image/', $pict_name);
+            $slug = Str::str_slug($request->product_name);
+            $pict_name = time() . '-' . $request->file('product_pict')->getClientOriginalName();
+            $pict->move('backend/product_image/', $pict_name);
             $product->product_pict = $pict_name;
             $product->save();
         }
