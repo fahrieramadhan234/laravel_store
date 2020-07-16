@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SiteController@index');
 
+Route::get('/product_detail/{id}', 'SiteController@product_detail');
+
 Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');
 Route::get('/admin/logout', 'AuthController@logout');

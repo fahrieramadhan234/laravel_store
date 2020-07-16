@@ -17,6 +17,9 @@ class CategoriesController extends Controller
     {
         $category_name = ucfirst($request->category_name);
         $request->request->add(['category_name' => $category_name]);
+        if (Categories::where('category_name', $category_name)->exists()) {
+            return redirect('/admin/categories')->with('Error', 'Category already exists');
+        }
         Categories::create($request->all());
 
         return redirect('/admin/categories')->with('Success', 'Category has been added');
