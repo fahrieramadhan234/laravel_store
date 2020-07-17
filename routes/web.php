@@ -40,4 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/categories/create', 'CategoriesController@create');
     Route::post('/admin/categories/edit/{id}', 'CategoriesController@edit');
     Route::get('/admin/categories/delete/{id}', 'CategoriesController@delete');
+
+    Route::get('/admin/customer', 'CustomerController@index');
 });

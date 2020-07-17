@@ -38,6 +38,12 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="/admin/customer">
+                        <i data-feather="users"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- End Sidebar -->
