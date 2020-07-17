@@ -223,7 +223,7 @@
             })
             .then((result) => {
                 if (result.value) {
-                    window.location = "/admin/categories/product/"+id;
+                    window.location = "/admin/product/delete/"+id;
                 }
             })
         });

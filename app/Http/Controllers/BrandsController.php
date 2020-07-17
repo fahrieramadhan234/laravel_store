@@ -51,7 +51,8 @@ class BrandsController extends Controller
         $brand->update($request->all());
         if ($request->hasFile('brand_logo')) {
             $logo = $request->file('brand_logo');
-            $logo_name = time() . "-" . $brand_code . "-logo";
+            $extension = $request->file('brand_logo')->getClientOriginalExtension();
+            $logo_name = time() . "-" . $brand_code . "-logo" . "." . $extension;
             $logo->move('backend/images/products-logo/', $logo_name);
             $brand->brand_logo = $logo_name;
             $brand->save();
