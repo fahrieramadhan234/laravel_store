@@ -63,7 +63,7 @@
                                     <p class="mb-4"><a href="" class="text-muted">( 36 Customer Reviews )</a></p>
                                     <h4 class="mb-4">Price : <span class="text-muted mr-2"></span>
                                         <b>Rp. {{number_format($product->product_price)}}</b></h4>
-                                    <h4><span class="badge bg-soft-success text-success mb-4">Instock</span></h4>
+                                    <h4><span class="badge bg-soft-success text-success mb-4">{{$stock}}</span></h4>
                                     <p class="text-muted mb-4">{{$product->product_desc}}</p>
                                     <div class="row mb-3">
                                         <div class="col-md-6">

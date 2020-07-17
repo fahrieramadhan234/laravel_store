@@ -42,4 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/categories/delete/{id}', 'CategoriesController@delete');
 
     Route::get('/admin/customer', 'CustomerController@index');
+    Route::post('/admin/customer/create', 'CustomerController@create');
+    Route::get('/admin/customer/edit/{id}', 'CustomerController@edit');
+    Route::get('/admin/customer/delete/{id}', 'CustomerController@delete');
+    Route::post('/admin/customer/update/{id}', 'CustomerController@update');
+    Route::get('/admin/customer/profile/{id}', 'CustomerController@profile');
 });

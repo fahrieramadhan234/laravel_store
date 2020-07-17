@@ -71,7 +71,13 @@ class ProductsController extends Controller
     public function detail($id)
     {
         $product = Products::find($id);
-
-        return view('admin.products.detail', ['product' => $product]);
+        if ($product->product_stock >= 30) {
+            $stock = "Ready Stok";
+        } elseif ($product->product_stock >= 1 && $product->product_stock < 30) {
+            $stock = "Limited";
+        } else {
+            $stock = "Out of Stock";
+        }
+        return view('admin.products.detail', ['product' => $product, 'stock' => $stock]);
     }
 }
