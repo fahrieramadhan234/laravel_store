@@ -61,7 +61,7 @@
         <!-- End Page content -->
         <!-- ============================================================== -->
 
-        @include('admin.layouts.footer')
+        @include('user.layouts.footer')
 
 
     </div>

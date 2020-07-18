@@ -14,6 +14,12 @@ class SiteController extends Controller
         return view('user.index', ['products' => $products]);
     }
 
+    public function login()
+    {
+
+        return view('user.login.index');
+    }
+
     public function product_detail($id)
     {
         $product = Products::find($id);

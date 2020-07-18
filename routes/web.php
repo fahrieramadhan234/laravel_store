@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'SiteController@index');
+Route::get('/login', 'SiteController@login');
 
 Route::get('/product_detail/{id}', 'SiteController@product_detail');
 
