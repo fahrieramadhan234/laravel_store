@@ -35,8 +35,8 @@
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-lg-8">
-                                    <a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal"
-                                        data-target="#myModal"><i class="mdi mdi-plus-circle mr-2"></i> Add
+                                    <a href="" class="btn btn-danger mb-2" data-toggle="modal" data-target="#myModal"><i
+                                            class="mdi mdi-plus-circle mr-2"></i> Add
                                         Customers</a>
                                 </div>
                             </div>
@@ -76,15 +76,23 @@
                                                 <tr role="row" class="odd">
                                                     <td><?= $no; ?></td>
                                                     <td class="table-user"><img src="{{$customer->getAvatar()}}"
-                                                            alt="table-user" class="mr-2 rounded-circle">
-                                                        {{$customer->first_name}}
-                                                        {{$customer->last_name}}</td>
+                                                            alt="table-user" class="mr-2 rounded-circle"><a
+                                                            href="/admin/customer/profile/{{$customer->id}}">
+                                                            {{$customer->first_name}}
+                                                            {{$customer->last_name}}</a></td>
                                                     <td>{{$customer->email}}</td>
                                                     <td>{{$customer->phone_number}}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                                        <a href="#" class="btn btn-danger btn-sm delete" product-id="#"
-                                                            product-name="#">Delete</a>
+                                                        {{-- <a href="#" class="btn btn-warning btn-sm">Edit</a> --}}
+                                                        <a href="/admin/customer/edit/{{$customer->id}}"
+                                                            class="action-icon"> <i class="mdi mdi-square-edit-outline"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-original-title="Edit"></i></a>
+                                                        <a href="#" class="action-icon delete"
+                                                            customer-id="{{$customer->id}}" customer-name="#"> <i
+                                                                class="mdi mdi-delete" data-toggle="tooltip"
+                                                                data-placement="top"
+                                                                data-original-title="Delete"></i></a>
                                                     </td>
                                                 </tr>
                                                 <?php $no++; ?>
@@ -102,7 +110,7 @@
     </div>
 </div>
 
-{{-- <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
     style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -110,59 +118,57 @@
                 <h4 class="modal-title" id="standard-modalLabel">Modal Heading</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form role="form" action="/admin/product/create" method="post" enctype="multipart/form-data">
+            <form role="form" action="/admin/customer/create" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
-<div class="modal-body">
-    <div class="box-body">
-        <div class="form-group">
-            <label for="nim">Product Name</label>
-            <input name="product_name" type="text" class="form-control" id="name" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <label>Brand</label>
-            <select name="brand_id" class="form-control">
-                <option value="">--Brand--</option>
-                @foreach ($brands as $b)
-                <option value="{{$b->brand_id}}">{{$b->brand_name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Category</label>
-            <select name="category_id" class="form-control">
-                <option value="">--Category--</option>
-                @foreach ($categories as $c)
-                <option value="{{$c->category_id}}">{{$c->category_name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="nama">Price</label>
-            <input name="product_price" type="num" class="form-control" placeholder="Price">
-        </div>
-        <div class="form-group">
-            <label for="nama">Stock</label>
-            <input name="product_stock" type="num" class="form-control" placeholder="Stock">
-        </div>
-        <div class="form-group">
-            <label for="nama">Description</label>
-            <textarea name="product_desc" cols="30" rows="10" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputFile">Pict</label>
-            <input name="product_pict" type="file" id="exampleInputFile" class="form-control-file">
-        </div>
-    </div>
-    <!-- /.box-body -->
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="nim">First Name</label>
+                            <input name="first_name" type="text" class="form-control" id="name"
+                                placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="nim">Last Name</label>
+                            <input name="last_name" type="text" class="form-control" id="name" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="nim">Email</label>
+                            <input name="email" type="email" class="form-control" id="name" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="radio">Sex</label><br>
+                            <div class="radio radio-info form-check-inline">
+                                <input type="radio" id="male" value="M" name="sex">
+                                <label for="male"> Male </label>
+                            </div>
+                            <div class="radio radio-info form-check-inline">
+                                <input type="radio" id="female" value="F" name="sex">
+                                <label for="female"> Female </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Phone Number</label>
+                            <input name="phone_number" type="num" class="form-control" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Address</label>
+                            <textarea name="address" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Avatar</label>
+                            <input name="avatar" type="file" id="exampleInputFile" class="form-control-file">
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Save</button>
-</div>
-</form>
-</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div> --}}
 
 
 @endsection
@@ -185,11 +191,11 @@
 <script>
     $(document).ready( function () {
         $('.delete').click(function(){
-            var id = $(this).attr('product-id');
-            var name = $(this).attr('product-name');
+            var id = $(this).attr('customer-id');
+            var name = $(this).attr('customer-name');
             Swal.fire({
                 title: 'Are you sure?',
-                text: "Are you sure want to delete this product ?",
+                text: "Are you sure want to delete this customer ?",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -198,7 +204,7 @@
             })
             .then((result) => {
                 if (result.value) {
-                    window.location = "/admin/categories/product/"+id;
+                    window.location = "/admin/customer/delete/"+id;
                 }
             })
         });
