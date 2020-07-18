@@ -17,6 +17,9 @@ class CustomerController extends Controller
     public function create(Request $request)
     {
         // dd($request->all());
+        $first_name = ucfirst($request->first_name);
+        $last_name = ucfirst($request->last_name);
+        $request->request->add(['first_name' => $first_name, 'last_name' => $last_name]);
         $customer = Customer::create($request->all());
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
