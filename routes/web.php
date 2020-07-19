@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'SiteController@index');
-Route::get('/login', 'SiteController@login');
+Route::get('/login', 'UserAuthController@login');
+Route::post('/login/post', 'UserAuthController@login_post');
+Route::get('/register', 'UserAuthController@register');
+Route::post('/register/post', 'UserAuthController@register_post');
+Route::get('/logout', 'UserAuthController@logout');
+
 
 Route::get('/product_detail/{id}', 'SiteController@product_detail');
 

@@ -56,10 +56,10 @@
                                                         rowspan="1" colspan="1" aria-sort="ascending"
                                                         aria-label="Rendering engine: activate to sort column descending"
                                                         style="width: 300px;">Customer</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Browser: activate to sort column ascending"
-                                                        style="width: 246px;">Email</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Rendering engine: activate to sort column descending"
+                                                        style="width: 300px;">Email</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Browser: activate to sort column ascending"
@@ -80,7 +80,7 @@
                                                             href="/admin/customer/profile/{{$customer->id}}">
                                                             {{$customer->first_name}}
                                                             {{$customer->last_name}}</a></td>
-                                                    <td>{{$customer->email}}</td>
+                                                    <td>{{$customer->account_customer->email}}</td>
                                                     <td>{{$customer->phone_number}}</td>
                                                     <td>
                                                         {{-- <a href="#" class="btn btn-warning btn-sm">Edit</a> --}}

@@ -4,24 +4,32 @@
 <div class="content-page">
     <div class="content">
         <div class="container-fluid">
-            <div class="container mt-4">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="row">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="my-4">Decks</h4>
+                    <div class="card-deck-wrapper">
+                        <div class="card-deck">
                             @foreach ($products as $p)
-                            <div class="card mb-4 mr-4" style="width: 18rem;">
-                                <a href="/product_detail/{{ $p->product_id }}"><img class="card-img-top"
-                                        src="{{$p->getPict()}}" alt="Card image cap"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{$p->product_name}}</h5>
-                                    <p class="card-text" style="color: #e66a12; font-weight:bold">Rp.
-                                        {{number_format($p->product_price)}}.</p>
-                                </div>
+                            <div class="card">
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{$p->getPict()}}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{$p->product_name}}</h4>
+                                        <h4 class="card-title" style="color: purple">Rp.
+                                            {{number_format($p->product_price)}}</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as
+                                            a natural lead-in to additional content. This content is a little
+                                            bit longer.</p>
+                                        <p class="card-text">
+                                            <small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </a>
                             </div>
                             @endforeach
-                        </div>
-                    </div>
-                </div>
+                        </div> <!-- end card-deck-->
+                    </div> <!-- end card-deck-wrapper-->
+                </div> <!-- end col-->
             </div>
         </div>
     </div>

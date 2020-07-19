@@ -10,18 +10,18 @@ class Customer extends Model
     protected $table = 'customer';
     protected $fillable =
     [
+        'account_customer_id',
         'first_name',
         'last_name',
-        'email',
         'sex',
         'phone_number',
         'address',
         'avatar'
     ];
 
-    public function user()
+    public function account_customer()
     {
-        return $this->hasOne(User::class, 'id');;
+        return $this->belongsTo(AccountCustomer::class);
     }
 
 

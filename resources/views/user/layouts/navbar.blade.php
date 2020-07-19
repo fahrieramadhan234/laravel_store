@@ -37,10 +37,30 @@
                 </a>
             </li>
 
+            @if(Session::has('login'))
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
+                    href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <span class="pro-user-name ml-1">
+                        {{$account->customer->first_name}} {{$account->customer->last_name}}<i
+                            class="mdi mdi-chevron-down"></i>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                    <!-- item-->
+                    <a href="/logout" class="dropdown-item notify-item">
+                        <i class="fe-log-out"></i>
+                        <span>Logout</span>
+                    </a>
+
+                </div>
+            </li>
+            @else
             <li class="mt-2 dropdown">
                 <a href="/login" class="btn btn-outline-primary btn-rounded waves-effect waves-light mr-2">Login</a>
                 <a href="/register" class="btn btn-primary btn-rounded waves-effect waves-light">Register</a>
             </li>
+            @endif
         </ul>
 
         <!-- LOGO -->

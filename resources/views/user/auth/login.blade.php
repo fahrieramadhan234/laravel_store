@@ -22,6 +22,9 @@
     <link href="{{asset('backend/assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css"
         id="app-dark-stylesheet" disabled />
 
+    <!-- Sweet Alert-->
+    <link href="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+
     <!-- icons -->
     <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 
@@ -57,10 +60,11 @@
                     <p class="text-muted mb-4">Enter your email address and password to access account.</p>
 
                     <!-- form -->
-                    <form action="#">
+                    <form action="/login/post" method="post">
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label for="emailaddress">Email address</label>
-                            <input class="form-control" type="email" id="emailaddress" required=""
+                            <input name="email" class="form-control" type="email" id="emailaddress" required=""
                                 placeholder="Enter your email">
                         </div>
                         <div class="form-group">
@@ -68,7 +72,7 @@
                                     password?</small></a>
                             <label for="password">Password</label>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control"
+                                <input name="password" type="password" id="password" class="form-control"
                                     placeholder="Enter your password">
                                 <div class="input-group-append" data-password="false">
                                     <div class="input-group-text">
@@ -116,8 +120,8 @@
 
                     <!-- Footer-->
                     <footer class="footer footer-alt">
-                        <p class="text-muted">Don't have an account? <a href="auth-register-2.html"
-                                class="text-muted ml-1"><b>Sign Up</b></a></p>
+                        <p class="text-muted">Don't have an account? <a href="/register" class="text-muted ml-1"><b>Sign
+                                    Up</b></a></p>
                     </footer>
 
                 </div> <!-- end .card-body -->
@@ -146,8 +150,31 @@
     <!-- Vendor js -->
     <script src="{{asset('backend/assets/js/vendor.min.js')}}"></script>
 
+
     <!-- App js -->
     <script src="{{asset('backend/assets/js/app.min.js')}}"></script>
+    <!-- Sweet Alerts js -->
+    <script src="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="{{asset('backend/assets/js/pages/sweet-alerts.init.js')}}"></script>
+
+    <script>
+        @if (Session::has('Success'))
+            Swal.fire(
+                'Success!',
+                "{{Session::get('Success')}}",
+                'success'
+            )
+        @elseif (Session::has('Error'))
+            Swal.fire({
+                title: "Error!",
+                text: "{{Session::get('Error')}}",
+                type: "error",
+                button: "Close!",
+            });
+        @endif
+    </script>
 
 </body>
 
