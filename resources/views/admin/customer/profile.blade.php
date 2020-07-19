@@ -27,11 +27,6 @@
                         <h4 class="mb-0">{{$customer->first_name}} {{$customer->last_name}}</h4>
 
                         <div class="text-left mt-3">
-                            <h4 class="font-13 text-uppercase">About Me :</h4>
-                            <p class="text-muted font-13 mb-3">
-                                Hi I'm Johnathn Deo,has been the industry's standard dummy text ever since the
-                                1500s, when an unknown printer took a galley of type.
-                            </p>
                             <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span
                                     class="ml-2">{{$customer->first_name}} {{$customer->last_name}}</span></p>
 
@@ -39,7 +34,7 @@
                                     class="ml-2">{{$customer->phone_number}}</span></p>
 
                             <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
-                                    class="ml-2 ">{{$customer->email}}</span>
+                                    class="ml-2 ">{{$customer->account_customer->email}}</span>
                             </p>
 
                             <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ml-2">USA</span>

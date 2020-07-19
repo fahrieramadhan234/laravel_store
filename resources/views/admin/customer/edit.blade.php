@@ -41,8 +41,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nim">Email</label>
-                                    <input name="email" type="text" class="form-control" id="name" placeholder="Name"
-                                        value="{{$customer->email}}" readonly>
+                                    <input name="email" type="text" class="form-control" id="name" placeholder="Email"
+                                        value="{{$customer->account_customer->email}}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="radio">Sex</label><br>

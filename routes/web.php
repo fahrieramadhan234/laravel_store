@@ -21,7 +21,7 @@ Route::post('/register/post', 'UserAuthController@register_post');
 Route::get('/logout', 'UserAuthController@logout');
 
 
-Route::get('/product_detail/{id}', 'SiteController@product_detail');
+Route::get('/product/detail/{id}', 'SiteController@product_detail');
 
 Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');

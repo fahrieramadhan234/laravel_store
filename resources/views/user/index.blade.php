@@ -5,31 +5,39 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
-                    <h4 class="my-4">Decks</h4>
-                    <div class="card-deck-wrapper">
-                        <div class="card-deck">
-                            @foreach ($products as $p)
-                            <div class="card">
-                                <a href="">
-                                    <img class="card-img-top img-fluid" src="{{$p->getPict()}}" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">{{$p->product_name}}</h4>
-                                        <h4 class="card-title" style="color: purple">Rp.
-                                            {{number_format($p->product_price)}}</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as
-                                            a natural lead-in to additional content. This content is a little
-                                            bit longer.</p>
-                                        <p class="card-text">
-                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                            @endforeach
-                        </div> <!-- end card-deck-->
-                    </div> <!-- end card-deck-wrapper-->
-                </div> <!-- end col-->
+                <div class="row">
+                    @foreach ($products as $p)
+                    <div class="col-md-6 col-xl-3">
+                        <a href="/product/detail/{{$p->product_id}}">
+                            <div class="card-box product-box">
+                                <div class="bg-dark">
+                                    <img src="{{$p->getPict()}}" alt="product-pic" class="img-fluid">
+                                </div>
+                                <div class="product-info">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h5 class="font-16 mt-0 sp-line-1"><a href="ecommerce-product-detail.html"
+                                                    class="text-dark">{{$p->product_name}}</a> </h5>
+                                            <div class="text-warning mb-2 font-13">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <h5 class="m-0"> <span class="text-muted"> Stocks :
+                                                    {{number_format($p->product_stock)}}</span></h5>
+                                        </div>
+                                        <div class="col-auto">
+                                            <h3 class="text-success">Rp. {{number_format($p->product_price)}}</h3>
+                                        </div>
+                                    </div> <!-- end row -->
+                                </div> <!-- end product info-->
+                            </div> <!-- end card-box-->
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

@@ -208,7 +208,7 @@
 
                     <div class="row mt-3">
                         <div class="col-12 text-center">
-                            <p class="text-white-50">Already have account? <a href="auth-login.html"
+                            <p class="text-white-50">Already have account? <a href="/login"
                                     class="text-white ml-1"><b>Sign In</b></a></p>
                         </div> <!-- end col -->
                     </div>

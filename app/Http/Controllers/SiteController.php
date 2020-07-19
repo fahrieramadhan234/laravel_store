@@ -20,7 +20,6 @@ class SiteController extends Controller
             $account = Session::get('account');
             return view('user.index', ['products' => $products, 'account' => $account]);
         }
-
         return view('user.index', ['products' => $products]);
     }
 
