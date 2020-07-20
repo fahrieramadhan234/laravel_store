@@ -1,7 +1,11 @@
 <div class="navbar-custom">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
-
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" href="/">
+                    <span class="pro-user-name ml-1">Home</span>
+                </a>
+            </li>
             <li class="d-none d-lg-block">
                 <form class="app-search">
                     <div class="app-search-box dropdown">
@@ -29,15 +33,15 @@
                     </form>
                 </div>
             </li>
+            @if(Session::has('login'))
             <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"
-                    role="button" aria-haspopup="false" aria-expanded="false">
+                <a href="/cart" class="nav-link dropdown-toggle waves-effect waves-light">
                     <i class="fe-shopping-cart noti-icon"></i>
-                    <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                    {{-- <span class="badge badge-danger rounded-circle noti-icon-badge">9</span> --}}
                 </a>
             </li>
 
-            @if(Session::has('login'))
+
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
                     href="#" role="button" aria-haspopup="false" aria-expanded="false">

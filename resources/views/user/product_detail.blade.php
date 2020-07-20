@@ -5,9 +5,10 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card-box">
+                <div class="col-12">
+                    <div class="card-box">
+                        <form action="/add_cart/{{$product->product_id}}" method="post">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-lg-5">
                                     <div class="tab-content pt-0">
@@ -58,29 +59,46 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <form class="form-inline mb-4">
+                                        <div class="form-inline mb-4">
                                             <label class="my-1 mr-2" for="quantityinput">Quantity</label>
-                                            <input type="num" class="custom-select my-1 mr-sm-3" id="quantityinput"
-                                                max="3">
-                                        </form>
+                                            <input name="qty" type="number" max="{{$product->product_stock}}" min="0"
+                                                class="form-control">
+                                        </div>
 
                                         <div>
                                             <button type="button" class="btn btn-danger mr-2"><i
                                                     class="mdi mdi-heart-outline"></i></button>
-                                            <button type="button" class="btn btn-success waves-effect waves-light">
+                                            <button type="submit" class="btn btn-success waves-effect waves-light">
                                                 <span class="btn-label"><i class="mdi mdi-cart"></i></span>Add to cart
                                             </button>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->
-                            </div>
-                            <!-- end row -->
-
-                        </div> <!-- end card-->
-                    </div> <!-- end col-->
-                </div>
+                            </div> <!-- end row -->
+                        </form>
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+    @if (Session::has('Warning'))
+        Swal.fire(
+            'Info!',
+            "{{Session::get('Warning')}}",
+            'info'
+        )
+    @elseif (Session::has('Error'))
+        Swal.fire({
+            title: "Error!",
+            text: "{{Session::get('Error')}}",
+            type: "error",
+            button: "Close!",
+        });
+    @endif
+</script>
 @endsection

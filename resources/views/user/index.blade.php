@@ -9,7 +9,7 @@
                     @foreach ($products as $p)
                     <div class="col-md-6 col-xl-3">
                         <a href="/product/detail/{{$p->product_id}}">
-                            <div class="card-box product-box">
+                            <div class="card-box">
                                 <div class="bg-dark">
                                     <img src="{{$p->getPict()}}" alt="product-pic" class="img-fluid">
                                 </div>
@@ -42,4 +42,22 @@
         </div>
     </div>
 </div>
+@endsection
+@section('footer')
+<script>
+    @if (Session::has('Success'))
+        Swal.fire(
+            'Success!',
+            "{{Session::get('Success')}}",
+            'success'
+        )
+    @elseif (Session::has('Error'))
+        Swal.fire({
+            title: "Error!",
+            text: "{{Session::get('Error')}}",
+            type: "error",
+            button: "Close!",
+        });
+    @endif
+</script>
 @endsection
