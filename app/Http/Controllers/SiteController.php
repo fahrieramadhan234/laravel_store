@@ -14,8 +14,11 @@ class SiteController extends Controller
         $products = Products::all();
         if (Session::has('login')) {
             $account = Session::get('account');
+            $cart = Session::get('cart');
+            // dd($cart);
             return view('user.index', ['products' => $products, 'account' => $account]);
         }
+
         return view('user.index', ['products' => $products]);
     }
 
@@ -25,37 +28,46 @@ class SiteController extends Controller
             return back()->with('Warning', 'You must login first');
         }
         $product = Products::find($id);
+        $cart = Session::get('cart');
 
         if (!$product) {
             abort(404);
         }
 
-        $cart = session()->get('cart');
-
-        if (!$cart) {
-            $cart = [
-                $id = [
-                    'product_name' => $product->product_name,
-                    'quantity' => $request->qty,
-                    'product_price' => $product->product_price,
-                    'product_pict' => $product->product_pict
-                ]
-            ];
-
-            session()->put('cart', $cart);
-
-            return redirect('/')->with('Success', 'Product added to cart successfully!');
-        }
-
-        $cart[$id] = [
+        // if (!$cart) {
+        $cart[$id] = array(
+            'product_id' => $product->product_id,
             'product_name' => $product->product_name,
             'quantity' => $request->qty,
             'product_price' => $product->product_price,
             'product_pict' => $product->product_pict
-        ];
-        session()->put('cart', $cart);
+        );
+        Session::put('cart', $cart);
 
         return redirect('/')->with('Success', 'Product added to cart successfully!');
+        // }
+
+        // $cart[$id] = [
+        //     'product_name' => $product->product_name,
+        //     'quantity' => $request->qty,
+        //     'product_price' => $product->product_price,
+        //     'product_pict' => $product->product_pict
+        // ];
+        // session()->put('cart', $cart);
+
+        // return redirect('/')->with('Success', 'Product added to cart successfully!');
+    }
+
+    public function cart_delete($id)
+    {
+        $cart = Session::get('cart');
+        // $product = $cart[$id]['product_id'];
+        // dd($cart[$id]);  
+
+        unset($cart[$id]);
+        Session::put('cart', $cart);
+
+        return redirect('/')->with('Success', 'Product deleted from cart successfully!');
     }
 
     public function cart()
@@ -64,7 +76,8 @@ class SiteController extends Controller
             return back()->with('Warning', 'You must login first');
         }
         $account = Session::get('account');
-        return view('user.cart', ['account' => $account]);
+        $cart = session('cart');
+        return view('user.cart', ['account' => $account, 'cart' => $cart]);
     }
 
     public function product_detail($id)

@@ -47,10 +47,10 @@
                                                 <?php $total = $detail['product_price'] * $detail['quantity']; ?>
                                                 <tr>
                                                     <td>
-                                                        <img src="{{$detail['product_pict']}}" alt="contact-img"
-                                                            class="rounded mr-3" height="48">
+                                                        <img src="{{asset('backend/images/products_image/'.$detail['product_pict'])}}"
+                                                            alt="contact-img" class="rounded mr-3" height="48">
                                                         <p class="m-0 d-inline-block align-middle font-16">
-                                                            <a href="ecommerce-product-detail.html"
+                                                            <a href="/product/detail/{{$detail['product_id']}}"
                                                                 class="text-reset font-family-secondary">{{$detail['product_name']}}</a>
                                                         </p>
                                                     </td>
@@ -65,11 +65,18 @@
                                                         Rp.{{number_format($total)}}
                                                     </td>
                                                     <td>
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
+                                                        <a href="/cart/delete/{{$detail['product_id']}}"
+                                                            class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
+
                                                 @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <center>Cart is empty</center>
+                                                    </td>
+                                                </tr>
                                                 @endif
                                             </tbody>
                                             <tfoot>

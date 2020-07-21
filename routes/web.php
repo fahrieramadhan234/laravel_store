@@ -24,6 +24,7 @@ Route::get('/logout', 'UserAuthController@logout');
 Route::get('/product/detail/{id}', 'SiteController@product_detail');
 Route::post('/add_cart/{id}', 'SiteController@addCart');
 Route::get('/cart', 'SiteController@cart');
+Route::get('/cart/delete/{id}', 'SiteController@cart_delete');
 
 Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');
