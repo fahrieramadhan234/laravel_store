@@ -15,7 +15,7 @@ class SiteController extends Controller
         if (Session::has('login')) {
             $account = Session::get('account');
             $cart = Session::get('cart');
-            // dd($cart);
+            // dd(Session::all());
             return view('user.index', ['products' => $products, 'account' => $account]);
         }
 
@@ -67,7 +67,7 @@ class SiteController extends Controller
         unset($cart[$id]);
         Session::put('cart', $cart);
 
-        return redirect('/')->with('Success', 'Product deleted from cart successfully!');
+        return redirect('/cart')->with('Success', 'Product deleted from cart successfully!');
     }
 
     public function cart()
@@ -77,6 +77,7 @@ class SiteController extends Controller
         }
         $account = Session::get('account');
         $cart = session('cart');
+        // dd($cart);
         return view('user.cart', ['account' => $account, 'cart' => $cart]);
     }
 

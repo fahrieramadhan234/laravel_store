@@ -1,6 +1,7 @@
 @extends('user.layouts.master')
 
 @section('content')
+
 <div class="content-page">
     <div class="content">
 
@@ -43,7 +44,8 @@
                                             </thead>
                                             <tbody>
                                                 @if(session('cart'))
-                                                @foreach (session('cart') as $id => $detail)
+                                                <?php $totalharga = 0; ?>
+                                                @foreach (session('cart') as $key => $detail)
                                                 <?php $total = $detail['product_price'] * $detail['quantity']; ?>
                                                 <tr>
                                                     <td>
@@ -69,22 +71,23 @@
                                                             class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
-
-                                                @endforeach
-                                                @else
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <center>Cart is empty</center>
-                                                    </td>
-                                                </tr>
-                                                @endif
-                                            </tbody>
+                                                <?php $totalharga+=$total; ?>
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="3"><b>Total</b></td>
-                                                    {{-- <td><b>Rp.{{number_format($totalharga)}}</b></td> --}}
+                                                    <td><b>Rp. {{number_format($totalharga)}}</b></td>
                                                 </tr>
                                             </tfoot>
+                                            @endforeach
+                                            @else
+                                            <tr>
+                                                <td colspan="4">
+                                                    <center>Cart is empty</center>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                            </tbody>
+
                                         </table>
                                     </div> <!-- end table-responsive-->
 
@@ -169,27 +172,24 @@
         </div> <!-- container -->
 
     </div> <!-- content -->
-
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    2015 - <script>
-                        document.write(new Date().getFullYear())
-                    </script>2020 © UBold theme by <a href="">Coderthemes</a>
-                </div>
-                <div class="col-md-6">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript:void(0);">About Us</a>
-                        <a href="javascript:void(0);">Help</a>
-                        <a href="javascript:void(0);">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- end Footer -->
-
 </div>
+@endsection
+
+@section('footer')
+<script>
+    @if (Session::has('Success'))
+        Swal.fire(
+            'Success!',
+            "{{Session::get('Success')}}",
+            'success'
+        )
+    @elseif (Session::has('Error'))
+        Swal.fire({
+            title: "Error!",
+            text: "{{Session::get('Error')}}",
+            type: "error",
+            button: "Close!",
+        });
+    @endif
+</script>
 @endsection

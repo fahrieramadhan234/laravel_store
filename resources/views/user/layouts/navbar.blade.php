@@ -36,12 +36,16 @@
             @if(Session::has('login'))
             <li class="dropdown notification-list topbar-dropdown">
                 <a href="/cart" class="nav-link dropdown-toggle waves-effect waves-light">
-                    <i class="fe-shopping-cart noti-icon"></i>
-                    <span
+
+                    @if (Session::has('cart'))
+                    <i class="fe-shopping-cart noti-icon"></i><span
                         class="badge badge-danger rounded-circle noti-icon-badge">{{count(Session::get('cart'))}}</span>
+                    @else
+                    <i class="fe-shopping-cart noti-icon"></i>
+                    @endif
                 </a>
             </li>
-            <li class="dropdown notification-list topbar-dropdown show">
+            {{-- <li class="dropdown notification-list topbar-dropdown show">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="true">
                     <i class="fe-bell noti-icon"></i>
@@ -156,7 +160,7 @@
                     </a>
 
                 </div>
-            </li>
+            </li> --}}
 
 
             <li class="dropdown notification-list topbar-dropdown">
