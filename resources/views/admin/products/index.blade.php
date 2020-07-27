@@ -98,19 +98,30 @@
                                                 @foreach ($products as $p)
                                                 <tr role="row" class="odd">
                                                     <td><?= $no; ?></td>
-                                                    <td><a
-                                                            href="/admin/product/detail/{{$p->product_id}}">{{$p->product_name}}</a>
+                                                    <td><a href="/admin/product/detail/{{$p->product_id}}">
+                                                            <img src="{{$p->getPict()}}" alt="product-img" height="32">
+                                                            {{$p->product_name}}
+                                                        </a>
                                                     </td>
                                                     <td>{{$p->brands->brand_name}}</td>
                                                     <td>{{$p->categories->category_name}}</td>
                                                     <td>Rp. {{number_format($p->product_price)}}</td>
-                                                    <td>{{$p->product_stock}}</td>
+                                                    <td>
+                                                        @if ($p->product_stock >= 11)
+                                                        <span class="badge bg-soft-success text-success">In Stock</span>
+                                                        @elseif ($p->product_stock > 0 && $p->product_stock <= 10) <span
+                                                            class="badge bg-soft-warning text-warning">Limited</span>
+                                                            @else
+                                                            <span class="badge bg-soft-danger text-danger">Out of
+                                                                Stock</span>
+                                                            @endif
+                                                    </td>
                                                     <td>
                                                         <a href="/admin/product/edit/{{$p->product_id}}"
                                                             class="btn btn-warning btn-sm">Edit</a>
                                                         <a href="#" class="btn btn-danger btn-sm delete"
                                                             product-id="{{$p->product_id}}"
-                                                            product-name="{{$p->product_name}}">Hapus</a>
+                                                            product-name="{{$p->product_name}}">Delete</a>
                                                     </td>
                                                 </tr>
                                                 <?php $no++; ?>
@@ -142,41 +153,89 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="nim">Product Name</label>
-                            <input name="product_name" type="text" class="form-control" id="name" placeholder="Name">
+                            <input name="product_name" type="text"
+                                class="form-control @if($errors->has('product_name')) parsley-error @endif" id="name"
+                                placeholder="Name" value="{{old('product_name')}}">
+                            @if ($errors->has('product_name'))
+                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                <li class="parsley-required">{{$errors->first('product_name')}}</li>
+                            </ul>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label>Brand</label>
-                            <select name="brand_id" class="form-control">
+                            <select name="brand_id"
+                                class="form-control @if($errors->has('brand_id')) parsley-error @endif">
                                 <option value="">--Brand--</option>
                                 @foreach ($brands as $b)
-                                <option value="{{$b->brand_id}}">{{$b->brand_name}}</option>
+                                <option value="{{$b->brand_id}}" @if (old('brand_id')==$b->brand_id) selected
+                                    @endif>{{$b->brand_name}} </option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('brand_id'))
+                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                <li class="parsley-required">{{$errors->first('brand_id')}}</li>
+                            </ul>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label>Category</label>
-                            <select name="category_id" class="form-control">
+                            <select name="category_id"
+                                class="form-control @if($errors->has('category_id')) parsley-error @endif">
                                 <option value="">--Category--</option>
                                 @foreach ($categories as $c)
-                                <option value="{{$c->category_id}}">{{$c->category_name}}</option>
+                                <option value="{{$c->category_id}}" @if (old('category_id')==$c->category_id) selected
+                                    @endif>{{$c->category_name}}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('category_id'))
+                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                <li class="parsley-required">{{$errors->first('category_id')}}</li>
+                            </ul>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="nama">Price</label>
-                            <input name="product_price" type="num" class="form-control" placeholder="Price">
+                            <input name="product_price" type="num"
+                                class="form-control @if($errors->has('product_price')) parsley-error @endif"
+                                placeholder="Price" value="{{old('product_price')}}">
+                            @if ($errors->has('product_price'))
+                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                <li class="parsley-required">{{$errors->first('product_price')}}</li>
+                            </ul>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="nama">Stock</label>
-                            <input name="product_stock" type="num" class="form-control" placeholder="Stock">
+                            <input name="product_stock" type="num"
+                                class="form-control @if($errors->has('product_stock')) parsley-error @endif"
+                                placeholder="Stock" value="{{old('product_stock')}}">
+                            @if ($errors->has('product_stock'))
+                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                <li class="parsley-required">{{$errors->first('product_stock')}}</li>
+                            </ul>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="nama">Description</label>
-                            <textarea name="product_desc" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="product_desc" cols="30" rows="10"
+                                class="form-control @if($errors->has('product_desc')) parsley-error @endif">{{old('product_desc')}}</textarea>
+                            @if ($errors->has('product_desc'))
+                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                <li class="parsley-required">{{$errors->first('product_desc')}}</li>
+                            </ul>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Pict</label>
-                            <input name="product_pict" type="file" id="exampleInputFile" class="form-control-file">
+                            <input name="product_pict[]" type="file" multiple="multiple" id="exampleInputFile"
+                                class="form-control-file @if($errors->has('product_pict')) parsley-error @endif"
+                                value="{{old('product_pict')}}">
+                            @if ($errors->has('product_pict'))
+                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                <li class="parsley-required">{{$errors->first('product_pict')}}</li>
+                            </ul>
+                            @endif
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -207,6 +266,13 @@
 <script src="{{asset('backend/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
 <script src="{{asset('backend/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
 <script src="{{asset('backend/assets/js/pages/datatables.init.js')}}"></script>
+<script>
+    @if($errors->any())
+        $(document).ready( function () {
+            $('#myModal').modal('show');
+        });
+    @endif
+</script>
 <script>
     $(document).ready( function () {
         $('.delete').click(function(){

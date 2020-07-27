@@ -90,8 +90,10 @@
         Swal.fire(
             'Info!',
             "{{Session::get('Warning')}}",
-            'info'
-        )
+            'info',
+        ).then(function(){
+            window.location = "/login";
+        });
     @elseif (Session::has('Error'))
         Swal.fire({
             title: "Error!",

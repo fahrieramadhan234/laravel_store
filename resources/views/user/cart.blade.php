@@ -60,8 +60,20 @@
                                                         Rp.{{number_format($detail['product_price'])}}
                                                     </td>
                                                     <td>
-                                                        <input type="number" min="1" value="{{$detail['quantity']}}"
-                                                            class="form-control" placeholder="Qty" style="width: 90px;">
+                                                        <div class="custom-quantity-input">
+                                                            <a href="/cart/minus/{{$detail['product_id']}}"
+                                                                class="action-icon quantity-input-down">
+                                                                <i class="mdi mdi-minus-circle mr-2"></i>
+                                                            </a>
+                                                            <input name="qty" type="number" min="1"
+                                                                value="{{$detail['quantity']}}"
+                                                                class="form-control d-inline-block mr-2"
+                                                                placeholder="Qty" style="width: 90px;">
+                                                            <a href="/cart/plus/{{$detail['product_id']}}"
+                                                                class="action-icon quantity-input-up">
+                                                                <i class="mdi mdi-plus-circle"></i>
+                                                            </a>
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         Rp.{{number_format($total)}}
@@ -72,13 +84,15 @@
                                                     </td>
                                                 </tr>
                                                 <?php $totalharga+=$total; ?>
+                                                @endforeach
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="3"><b>Total</b></td>
-                                                    <td><b>Rp. {{number_format($totalharga)}}</b></td>
+                                                    <td><b>
+                                                            <h3>Rp. {{number_format($totalharga)}}</h3>
+                                                        </b></td>
                                                 </tr>
                                             </tfoot>
-                                            @endforeach
                                             @else
                                             <tr>
                                                 <td colspan="4">
@@ -176,6 +190,24 @@
 @endsection
 
 @section('footer')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    //     $(function(){
+//   $(".quantity-input-up").click(function(){
+//     var inpt = $(this).parents(".custom-quantity-input").find("[name=qty]");
+//     var val = parseInt(inpt.val());
+//     if ( val < 0 ) inpt.val(val=0);
+//     inpt.val(val+1);
+//   });
+//   $(".quantity-input-down").click(function(){
+//     var inpt = $(this).parents(".custom-quantity-input").find("[name=qty]");
+//     var val = parseInt(inpt.val());
+//     if ( val < 0 ) inpt.val(val=0);
+//     if ( val == 0 ) return;
+//     inpt.val(val-1);
+//   });
+// });
+</script>
 <script>
     @if (Session::has('Success'))
         Swal.fire(

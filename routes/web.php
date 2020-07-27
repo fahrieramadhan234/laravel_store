@@ -22,9 +22,11 @@ Route::get('/logout', 'UserAuthController@logout');
 
 
 Route::get('/product/detail/{id}', 'SiteController@product_detail');
-Route::post('/add_cart/{id}', 'SiteController@addCart');
-Route::get('/cart', 'SiteController@cart');
-Route::get('/cart/delete/{id}', 'SiteController@cart_delete');
+Route::post('/add_cart/{id}', 'CartController@addCart');
+Route::get('/cart', 'CartController@cart');
+Route::get('/cart/plus/{id}', 'CartController@plus_cart');
+Route::get('/cart/minus/{id}', 'CartController@minus_cart');
+Route::get('/cart/delete/{id}', 'CartController@cart_delete');
 
 Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');
