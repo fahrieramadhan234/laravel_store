@@ -35,6 +35,7 @@ Route::get('/admin/logout', 'AuthController@logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/dashboard', 'DashboardController@index');
     Route::get('/admin/products', 'ProductsController@index');
+    Route::get('/admin/products/print_pdf', 'ProductsController@print_pdf');
     Route::post('/admin/product/create', 'ProductsController@create');
     Route::get('/admin/product/edit/{id}', 'ProductsController@edit');
     Route::post('/admin/product/update/{id}', 'ProductsController@update');

@@ -13,8 +13,8 @@
                                 <div class="col-lg-5">
                                     <div class="tab-content pt-0">
                                         <div class="tab-pane active show" id="product-1-item">
-                                            <img src="{{$product->getPict()}}" alt=""
-                                                class="img-fluid mx-auto d-block rounded">
+                                            <img src="{{asset('backend/images/products_image/1595853233-ryzen7.jpg')}}"
+                                                alt="" class="img-fluid mx-auto d-block rounded">
                                         </div>
                                     </div>
                                 </div> <!-- end col -->

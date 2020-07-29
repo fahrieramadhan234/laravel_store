@@ -39,16 +39,17 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="text-lg-right">
-                                        <div class="dt-buttons btn-group flex-wrap mr-2"> <button
-                                                class="btn btn-secondary buttons-copy buttons-html5 btn-light"
+                                        <div class="dt-buttons btn-group flex-wrap mr-2">
+                                            <button class="btn btn-secondary buttons-copy buttons-html5 btn-light"
                                                 tabindex="0" aria-controls="datatable-buttons"
-                                                type="button"><span>Copy</span></button> <button
-                                                class="btn btn-secondary buttons-print btn-light" tabindex="0"
+                                                type="button"><span>Copy</span></button>
+                                            <button class="btn btn-secondary buttons-print btn-light" tabindex="0"
                                                 aria-controls="datatable-buttons"
-                                                type="button"><span>Print</span></button> <button
+                                                type="button"><span>Print</span></button>
+                                            <a href="/admin/products/print_pdf"
                                                 class="btn btn-secondary buttons-pdf buttons-html5 btn-light"
                                                 tabindex="0" aria-controls="datatable-buttons"
-                                                type="button"><span>PDF</span></button> </div>
+                                                type="button"><span>PDF</span></a> </div>
                                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i
                                                 class="mdi mdi-plus-circle mr-1"></i>Add
                                             Data</a>
@@ -94,13 +95,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $no=1; ?>
+                                                @php $no=1 @endphp
                                                 @foreach ($products as $p)
                                                 <tr role="row" class="odd">
-                                                    <td><?= $no; ?></td>
-                                                    <td><a href="/admin/product/detail/{{$p->product_id}}">
-                                                            <img src="{{$p->getPict()}}" alt="product-img" height="32">
-                                                            {{$p->product_name}}
+                                                    <td>{{ $no++ }}</td>
+                                                    <td><a href="/admin/product/detail/{{$p->product_id}}">{{$p->product_name}}
                                                         </a>
                                                     </td>
                                                     <td>{{$p->brands->brand_name}}</td>
@@ -124,7 +123,6 @@
                                                             product-name="{{$p->product_name}}">Delete</a>
                                                     </td>
                                                 </tr>
-                                                <?php $no++; ?>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -194,27 +192,29 @@
                             </ul>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label for="nama">Price</label>
-                            <input name="product_price" type="num"
-                                class="form-control @if($errors->has('product_price')) parsley-error @endif"
-                                placeholder="Price" value="{{old('product_price')}}">
-                            @if ($errors->has('product_price'))
-                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
-                                <li class="parsley-required">{{$errors->first('product_price')}}</li>
-                            </ul>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="nama">Stock</label>
-                            <input name="product_stock" type="num"
-                                class="form-control @if($errors->has('product_stock')) parsley-error @endif"
-                                placeholder="Stock" value="{{old('product_stock')}}">
-                            @if ($errors->has('product_stock'))
-                            <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
-                                <li class="parsley-required">{{$errors->first('product_stock')}}</li>
-                            </ul>
-                            @endif
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="nama">Price</label>
+                                <input name="product_price" type="num"
+                                    class="form-control @if($errors->has('product_price')) parsley-error @endif"
+                                    placeholder="Price" value="{{old('product_price')}}">
+                                @if ($errors->has('product_price'))
+                                <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                    <li class="parsley-required">{{$errors->first('product_price')}}</li>
+                                </ul>
+                                @endif
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="nama">Stock</label>
+                                <input name="product_stock" type="num"
+                                    class="form-control @if($errors->has('product_stock')) parsley-error @endif"
+                                    placeholder="Stock" value="{{old('product_stock')}}">
+                                @if ($errors->has('product_stock'))
+                                <ul class="parsley-errors-list filled" id="parsley-id-7" aria-hidden="false">
+                                    <li class="parsley-required">{{$errors->first('product_stock')}}</li>
+                                </ul>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="nama">Description</label>

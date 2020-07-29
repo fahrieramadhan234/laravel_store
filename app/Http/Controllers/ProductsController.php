@@ -9,6 +9,7 @@ use App\Models\Brands;
 use App\Models\Categories;
 use App\Models\ProductPicture;
 use illuminate\Support\Facades\File;
+use PDF;
 
 class ProductsController extends Controller
 {
@@ -77,6 +78,7 @@ class ProductsController extends Controller
         $brands = Brands::all();
         $categories = Categories::all();
 
+
         return view('admin.products.edit', ['product' => $product, 'brands' => $brands, 'categories' => $categories]);
     }
 
@@ -122,6 +124,10 @@ class ProductsController extends Controller
     public function detail($id)
     {
         $product = Products::find($id);
+        $product_picture = ProductPicture::where('product_id', $id);
+        $picture_name = $product_picture->pluck('product_pict');
+        $pict = public_path() . '/backend/images/products_image/' . $picture_name;
+        // dd($picture_name[0]);
         if ($product->product_stock >= 30) {
             $stock = "Ready Stok";
         } elseif ($product->product_stock >= 1 && $product->product_stock < 30) {
@@ -129,6 +135,14 @@ class ProductsController extends Controller
         } else {
             $stock = "Out of Stock";
         }
-        return view('admin.products.detail', ['product' => $product, 'stock' => $stock]);
+        return view('admin.products.detail', ['product' => $product, 'stock' => $stock, 'product_pict' => $picture_name[0]]);
+    }
+
+    public function print_pdf()
+    {
+        $products = Products::all();
+
+        $pdf = PDF::loadview('admin.products.products_pdf', ['products' => $products]);
+        return $pdf->download('laporan-pegawai-pdf');
     }
 }
