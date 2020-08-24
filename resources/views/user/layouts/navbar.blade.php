@@ -22,10 +22,10 @@
     <div class="col-sm-3 bg-grey text-right">
         <a href="/cart" class="mr-3">
             @if (Session::has('cart'))
-            <i class="fe-shopping-cart noti-icon"></i><span
+            <i class="fas fa-shopping-cart fa-lg"></i><span
                 class="badge badge-danger rounded-circle noti-icon-badge">{{count(Session::get('cart'))}}</span>
             @else
-            <i class="fas fa-shopping-cart fa-lg"></i><span class="badge rounded-circle badge-danger">4</span>
+            <i class="fas fa-shopping-cart fa-lg"></i><span class="badge rounded-circle badge-danger"></span>
             @endif
         </a>
         @if (Session::has('login'))

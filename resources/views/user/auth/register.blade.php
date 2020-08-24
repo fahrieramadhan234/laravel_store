@@ -10,18 +10,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
 
     <!-- App css -->
-    {{-- <link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"
-    id="bs-default-stylesheet" />
-    <link href="{{asset('backend/assets/css/app.min.css')}}" rel="stylesheet" type="text/css"
-        id="app-default-stylesheet" />
-
-    <link href="{{asset('backend/assets/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css"
-        id="bs-dark-stylesheet" disabled />
-    <link href="{{asset('backend/assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css"
-        id="app-dark-stylesheet" disabled /> --}}
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/custom_css.css')}}">
 
 
     <!-- icons -->
@@ -31,119 +24,97 @@
 
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-4">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card mt-4">
+                    <div class="text-center mt-4">    
+                        <h2>Daftar akun baru</h2>
+                    </div>
                     <form action="/register/post" method="post" id="formCheckPassword" class="m-5">
                         {{ csrf_field() }}
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="fullname">First Name</label>
                                     <input name="first_name"
-                                        class="form-control @if($errors->has('first_name')) parsley-error @endif"
-                                        type="text" id="fullname" placeholder="Enter your First Name"
+                                        class="form-control @if($errors->has('first_name')) is-invalid @endif"
+                                        type="text" id="fullname" placeholder="Nama Depan"
                                         data-parsley-id="53" aria-describedby="data-parsley-id"
                                         value="{{old('first_name')}}">
                                     @if($errors->has('first_name'))
-                                    <ul class="parsley-errors-list filled" id="parsley-id-53" aria-hidden="false">
-                                        <li class="parsley-required">{{$errors->first('first_name')}}</li>
-                                    </ul>
-                                    @endif</div>
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('first_name')}}
+                                    </div>
+                                    @endif
+                                </div>
                                 <div class="col-md-6">
-                                    <label for="fullname">Last Name</label>
                                     <input name="last_name"
-                                        class="form-control @if($errors->has('last_name')) parsley-error @endif"
-                                        type="text" id="fullname" placeholder="Enter your Last Name"
+                                        class="form-control @if($errors->has('last_name')) is-invalid @endif"
+                                        type="text" id="fullname" placeholder="Nama Belakang"
                                         value="{{old('last_name')}}">
                                     @if($errors->has('last_name'))
-                                    <ul class="parsley-errors-list filled" id="parsley-id-53" aria-hidden="false">
-                                        <li class="parsley-required">{{$errors->first('last_name')}}</li>
-                                    </ul>
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('last_name')}}
+                                    </div>
                                     @endif
                                 </div>
 
                             </div>
                         </div>
-                        {{-- <div class="form-group">
-                           
-                        </div> --}}
                         <div class="form-group">
-                            <label for="emailaddress">Email address</label>
-                            <input name="email" class="form-control @if($errors->has('email')) parsley-error @endif"
-                                type="email" id="emailaddress" placeholder="Enter your email" value="{{old('email')}}">
+                            <input name="email" class="form-control @if($errors->has('email')) is-invalid @endif"
+                                type="email" id="emailaddress" placeholder="Email" value="{{old('email')}}">
                             @if($errors->has('email'))
-                            <ul class="parsley-errors-list filled" id="parsley-id-53" aria-hidden="false">
-                                <li class="parsley-required">{{$errors->first('email')}}</li>
-                            </ul>
+                            <div class="invalid-feedback">
+                                {{$errors->first('email')}}
+                            </div>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <div class="input-group input-group-merge">
                                 <input name="password" type="password" id="password"
-                                    class="password form-control @if($errors->has('password')) parsley-error @endif"
-                                    placeholder="Enter your password" value="{{old('password')}}">
-                                <div class="input-group-append" data-password="false">
-                                    <div class="input-group-text">
-                                        <a href="#" onclick="showPass()"><span class="password-eye"><i
-                                                    class="eye fa fa-eye"></i></span></a>
-                                    </div>
-                                </div>
-                            </div>
+                                    class="password form-control @if($errors->has('password')) is-invalid @endif"
+                                    placeholder="Password" value="{{old('password')}}">
                             @if($errors->has('password'))
-                            <ul class="parsley-errors-list filled" id="parsley-id-53" aria-hidden="false">
-                                <li class="parsley-required">{{$errors->first('password')}}</li>
-                            </ul>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Confirm Password</label>
-                            <div class="input-group input-group-merge">
-                                <input name="confirm_password" type="password" id="cfmPassword"
-                                    class="form-control @if($errors->has('confirm_password')) parsley-error @endif"
-                                    placeholder="Enter your password" value="{{old('confirm_password')}}">
-                                <div class="input-group-append" data-password="false">
-                                    <div class="input-group-text">
-                                        <a href="#" onclick="showPass()"><span class="password-eye"><i
-                                                    class="eye fa fa-eye"></i></span></a>
-                                    </div>
-                                </div>
+                            <div class="invalid-feedback">
+                                {{$errors->first('password')}}
                             </div>
-                            @if($errors->has('confirm_password'))
-                            <ul class="parsley-errors-list filled" id="parsley-id-53" aria-hidden="false">
-                                <li class="parsley-required">{{$errors->first('confirm_password')}}</li>
-                            </ul>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="radio">Sex</label><br>
-                            <div class="form-check form-check-inline @if($errors->has('sex')) parsley-error @endif">
+                                <input name="confirm_password" type="password" id="cfmPassword"
+                                    class="form-control @if($errors->has('confirm_password')) is-invalid @endif"
+                                    placeholder="Konfirmasi password" value="{{old('confirm_password')}}">
+                            @if($errors->has('confirm_password'))
+                            <div class="invalid-feedback">
+                                {{$errors->first('confirm_password')}}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-check-inline @if($errors->has('sex')) is-invalid @endif">
                                 <input class="form-check-input" type="radio" id="male" value="M" name="sex"
                                     @if(old('sex')) checked @endif>
-                                <label class="form-check-label" for="male"> Male </label>
+                                <label class="form-check-label" for="male"> Laki-laki </label>
                             </div>
-                            <div class="form-check form-check-inline @if($errors->has('sex')) parsley-error @endif">
+                            <div class="form-check form-check-inline @if($errors->has('sex')) is-invalid @endif">
                                 <input class="form-check-input" type="radio" id="female" value="F" name="sex"
                                     @if(old('sex')) checked @endif>
-                                <label class="form-check-label" for="female"> Female </label>
+                                <label class="form-check-label" for="female"> Perempuan </label>
                             </div>
                             @if($errors->has('sex'))
-                            <ul class="parsley-errors-list filled" id="parsley-id-53" aria-hidden="false">
-                                <li class="parsley-required">{{$errors->first('sex')}}</li>
-                            </ul>
+                            <div class="invalid-feedback">
+                                {{$errors->first('sex')}}
+                            </div>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="nama">Phone Number</label>
                             <input name="phone_number" type="num"
-                                class="form-control @if($errors->has('phone_number')) parsley-error @endif"
-                                placeholder="Phone Number" value="{{old('phone_number')}}">
+                                class="form-control @if($errors->has('phone_number')) is-invalid @endif"
+                                placeholder="Nomor Handphone" value="{{old('phone_number')}}">
                             @if($errors->has('phone_number'))
-                            <ul class="parsley-errors-list filled" id="parsley-id-53" aria-hidden="false">
-                                <li class="parsley-required">{{$errors->first('phone_number')}}</li>
-                            </ul>
+                            <div class="invalid-feedback">
+                                {{$errors->first('phone_number')}}
+                            </div>
                             @endif
                         </div>
                         <div class="form-group">
@@ -155,21 +126,22 @@
                             </div>
                         </div>
                         <div class="form-group mb-0 text-center">
-                            <button class="btn btn-primary btn-block" type="submit"> Sign Up </button>
+                            <button class="btn btn-primary btn-block" type="submit"> Daftar </button>
                         </div>
-
+                        <div class="separator mt-4"> ATAU </div>
+                        <div class="form-group mb-0 text-center mt-4">
+                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-google mr-2"></i> Daftar dengan Google </a>
+                        </div>
+                        <div class="form-group mb-0 text-center mt-4">
+                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-facebook mr-2"></i> Daftar dengan Facebook </a>
+                        </div>
                     </form>
+                    
                 </div>
             </div>
         </div>
     </div>
     <!-- end page -->
-
-    <footer class="footer footer-alt">
-        2015 - <script>
-            document.write(new Date().getFullYear())
-        </script> &copy; UBold theme by <a href="" class="text-white-50">Coderthemes</a>
-    </footer>
     <script>
         function showPass() {
             const pass = document.getElementsByClassName('#password');
