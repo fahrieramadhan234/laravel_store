@@ -167,7 +167,7 @@
             })
             .then((result) => {
                 if (result.value) {
-                    window.location = "/admin/brands/delete/"+id;
+                    window.location = "/admin/brand/delete/"+id;
                 }
             })
         });

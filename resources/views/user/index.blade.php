@@ -1,7 +1,7 @@
 @extends('user.layouts.master')
 
 @section('content')
-<div class="content-page">
+<div class="content-page mt-4 bg-dark container">
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -11,7 +11,9 @@
                         <a href="/product/detail/{{$p->product_id}}">
                             <div class="card-box">
                                 <div class="bg-dark">
-                                    <img src="{{$p->getPict()}}" alt="product-pic" class="img-fluid">
+                                    {{-- {{dd($p->product_picture[0]->product_pict)}} --}}
+                                    <img src="{{asset('backend/images/products_image/' . $p->product_picture[0]->product_pict)}}"
+                                        alt="product-pic" class="img-fluid" style="height: 250px">
                                 </div>
                                 <div class="product-info">
                                     <div class="row align-items-center">

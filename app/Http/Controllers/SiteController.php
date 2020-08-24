@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductPicture;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use Illuminate\Support\Facades\Session;
@@ -15,6 +16,8 @@ class SiteController extends Controller
         if (Session::has('login')) {
             $account = Session::get('account');
             $cart = Session::get('cart');
+            // dd($products[0]->product_picture[0]->product_pict);
+            // $pict = $products[0]->product_picture[0]->product_pict;
             // dd(Session::all());
             return view('user.index', ['products' => $products, 'account' => $account]);
         }

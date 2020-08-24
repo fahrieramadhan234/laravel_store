@@ -43,9 +43,9 @@
                                             <button class="btn btn-secondary buttons-copy buttons-html5 btn-light"
                                                 tabindex="0" aria-controls="datatable-buttons"
                                                 type="button"><span>Copy</span></button>
-                                            <button class="btn btn-secondary buttons-print btn-light" tabindex="0"
-                                                aria-controls="datatable-buttons"
-                                                type="button"><span>Print</span></button>
+                                            <a href="#" onclick="print()"
+                                                class="btn btn-secondary buttons-print btn-light" tabindex="0"
+                                                aria-controls="datatable-buttons" type="button"><span>Print</span></a>
                                             <a href="/admin/products/print_pdf"
                                                 class="btn btn-secondary buttons-pdf buttons-html5 btn-light"
                                                 tabindex="0" aria-controls="datatable-buttons"
@@ -266,6 +266,11 @@
 <script src="{{asset('backend/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
 <script src="{{asset('backend/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
 <script src="{{asset('backend/assets/js/pages/datatables.init.js')}}"></script>
+<script>
+    function print() {
+        print("lul")
+    }
+</script>
 <script>
     @if($errors->any())
         $(document).ready( function () {

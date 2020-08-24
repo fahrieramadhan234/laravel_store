@@ -127,7 +127,7 @@ class ProductsController extends Controller
         $product_picture = ProductPicture::where('product_id', $id);
         $picture_name = $product_picture->pluck('product_pict');
         $pict = public_path() . '/backend/images/products_image/' . $picture_name;
-        // dd($picture_name[0]);
+        // dd($picture_name);
         if ($product->product_stock >= 30) {
             $stock = "Ready Stok";
         } elseif ($product->product_stock >= 1 && $product->product_stock < 30) {
@@ -135,7 +135,7 @@ class ProductsController extends Controller
         } else {
             $stock = "Out of Stock";
         }
-        return view('admin.products.detail', ['product' => $product, 'stock' => $stock, 'product_pict' => $picture_name[0]]);
+        return view('admin.products.detail', ['product' => $product, 'stock' => $stock, 'picture_name' => $picture_name]);
     }
 
     public function print_pdf()
@@ -143,6 +143,6 @@ class ProductsController extends Controller
         $products = Products::all();
 
         $pdf = PDF::loadview('admin.products.products_pdf', ['products' => $products]);
-        return $pdf->download('laporan-pegawai-pdf');
+        return $pdf->download(date("l jS \of F Y h:i:s A ") . 'products-report.pdf');
     }
 }

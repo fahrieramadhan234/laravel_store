@@ -3,10 +3,8 @@
 @section('content')
 <div class="content-page">
     <div class="content">
-
         <!-- Start Content-->
         <div class="container-fluid">
-
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
@@ -29,26 +27,18 @@
                     <div class="card-box">
                         <div class="row">
                             <div class="col-lg-5">
-
-                                <div class="tab-content pt-0">
-                                    <div class="tab-pane active show" id="product-1-item">
-                                        <img src="{{$product->getPict()}}" alt=""
-                                            class="img-fluid mx-auto d-block rounded">
-                                    </div>
-                                    <div class="tab-pane" id="product-2-item">
-                                        <img src="../assets/images/products/product-10.jpg" alt=""
-                                            class="img-fluid mx-auto d-block rounded">
-                                    </div>
-                                    <div class="tab-pane" id="product-3-item">
-                                        <img src="../assets/images/products/product-11.jpg" alt=""
-                                            class="img-fluid mx-auto d-block rounded">
-                                    </div>
-                                    <div class="tab-pane" id="product-4-item">
-                                        <img src="../assets/images/products/product-12.jpg" alt=""
-                                            class="img-fluid mx-auto d-block rounded">
+                                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        @foreach ($picture_name as $item)
+                                        <div class="carousel-item active">
+                                            <img class="d-block img-fluid"
+                                                src="{{asset('backend/images/products_image/'.$item)}}"
+                                                alt="First slide">
+                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                            </div> <!-- end col -->
+                            </div>
                             <div class="col-lg-7">
                                 <div class="pl-xl-3 mt-3 mt-xl-0">
                                     <a href="#" class="text-primary">Jack &amp; Jones</a>
@@ -98,39 +88,28 @@
                                 </div>
                             </div> <!-- end col -->
                         </div>
-                        <!-- end row -->
-
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-            </div>
-            <!-- end row-->
-
-        </div> <!-- container -->
-
-    </div> <!-- content -->
-
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    2015 - <script>
-                        document.write(new Date().getFullYear())
-                    </script>2020 © UBold theme by <a href="">Coderthemes</a>
-                </div>
-                <div class="col-md-6">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript:void(0);">About Us</a>
-                        <a href="javascript:void(0);">Help</a>
-                        <a href="javascript:void(0);">Contact Us</a>
                     </div>
-                </div>
+                </div> <!-- end col -->
+
+
             </div>
-        </div>
-    </footer>
-    <!-- end Footer -->
+            <!-- end row -->
 
+        </div> <!-- end card-->
+    </div> <!-- end col-->
 </div>
+<!-- end row-->
 
 
+
+@endsection
+
+@section('footer')
+<script>
+    $(document).ready( function{
+            $('.carousel-control-prev').click(function{
+
+            });
+        });
+</script>
 @endsection
