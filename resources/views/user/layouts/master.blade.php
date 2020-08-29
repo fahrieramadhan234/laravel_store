@@ -18,7 +18,9 @@
         type="text/css" />
 
     <!-- App css -->
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('frontend/bulma/css/bulma.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/bulma/custom.css')}}">
 
     <!-- icons -->
     <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
@@ -47,9 +49,7 @@
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
-
         @yield('content')
-
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->

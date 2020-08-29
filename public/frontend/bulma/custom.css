@@ -1,0 +1,22 @@
+.card .card-image,
+.card .card-image .image img {
+    min-height: 200px;
+}
+
+.card,
+.card .card-image .image img {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.card {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.columns .column a {
+    text-decoration: none;
+}
+
+.table-cart {
+    width: 100%;
+}

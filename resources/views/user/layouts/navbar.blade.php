@@ -1,41 +1,62 @@
-<nav class="navbar navbar-light bg-light container-fluid">
-    <div class="col-sm-2">
-        <a class="navbar-brand">Navbar</a>
+<nav class="navbar container is-fluid" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
-    <div class="col-sm-7 ">
-        <form class="" action="/cart">
-            <div class="input-group">
-                <div class="input-group">
-                    <input type="text" name="search" id="search" value="test"
-                        placeholder="Search accounts, contracts and transactions" class="form-control">
-                    <div class="input-group-append">
-                        <span class="input-group-btn">
-                            <button type="submit" name="commit" class="btn btn-primary" data-disable-with="Search">
-                                <i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a href="/" class="navbar-item">
+                Home
+            </a>
+        </div>
+        <form action="" method="POST">
+            <div class="field has-addons">
+                <div class="control mt-3">
+                    <input class="input" type="text" placeholder="Search...">
+                </div>
+                <div class="control mt-3">
+                    <a class="button is-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </a>
                 </div>
             </div>
         </form>
-    </div>
-
-    <div class="col-sm-3 bg-grey text-right">
-        <a href="/cart" class="mr-3">
-            @if (Session::has('cart'))
-            <i class="fas fa-shopping-cart fa-lg"></i><span
-                class="badge badge-danger rounded-circle noti-icon-badge">{{count(Session::get('cart'))}}</span>
-            @else
-            <i class="fas fa-shopping-cart fa-lg"></i><span class="badge rounded-circle badge-danger"></span>
-            @endif
-        </a>
-        @if (Session::has('login'))
-        <span>
-            <span>Hi, </span>{{$account->customer->first_name}}
-            <a href="/logout" class="btn btn-link btn-sm">Logout</a>
-        </span>
-        @else
-        <a href="/login" class="btn btn-outline-primary mr-2">Login</a>
-        <a href="/register" class="btn btn-primary">Daftar</a>
-        @endif
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a href="/cart" class="mr-5">
+                        @if (Session::has('cart'))
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="badge badge-danger rounded-circle noti-icon-badge">
+                            <span class="tag is-danger">{{count(Session::get('cart'))}}</span>
+                        </span>
+                        @else
+                        <i class="fas fa-shopping-cart fa-lg"></i><span
+                            class="badge rounded-circle badge-danger"></span>
+                        @endif
+                    </a>
+                    @if (Session::has('login'))
+                    <span class="mr-2">Hi, {{$account->customer->first_name}}</span>
+                    <span class="mt-2"><a href="/logout" class="button is-text">Logout</a></span>
+                    @else
+                    <a href="/register" class="button is-primary">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a href="/login" class="button is-light">
+                        Log in
+                    </a>
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
 </nav>

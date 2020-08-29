@@ -1,84 +1,57 @@
 @extends('user.layouts.master')
 
 @section('content')
-<div class="content-page">
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card-box">
-                        <form action="/add_cart/{{$product->product_id}}" method="post">
-                            {{ csrf_field() }}
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="tab-content pt-0">
-                                        <div class="tab-pane active show" id="product-1-item">
-                                            <img src="{{asset('backend/images/products_image/1595853233-ryzen7.jpg')}}"
-                                                alt="" class="img-fluid mx-auto d-block rounded">
-                                        </div>
-                                    </div>
-                                </div> <!-- end col -->
-                                <div class="col-lg-7">
-                                    <div class="pl-xl-3 mt-3 mt-xl-0">
-                                        <h4 class="mb-3">{{$product->product_name}}</h4>
-                                        <p class="text-muted float-left mr-3">
-                                            <span class="mdi mdi-star text-warning"></span>
-                                            <span class="mdi mdi-star text-warning"></span>
-                                            <span class="mdi mdi-star text-warning"></span>
-                                            <span class="mdi mdi-star text-warning"></span>
-                                            <span class="mdi mdi-star"></span>
-                                        </p>
-                                        <p class="mb-4"><a href="" class="text-muted">( 36 Customer Reviews )</a></p>
-                                        <h6 class="text-danger text-uppercase">20 % Off</h6>
-                                        <h4 class="mb-4">Price : <b>Rp. {{ number_format($product->product_price)}}</b>
-                                        </h4>
-                                        <h4><span class="badge bg-soft-success text-success mb-4">Instock</span></h4>
-                                        <p class="text-muted mb-4">{{$product->product_desc}}</p>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div>
-                                                    <p class="text-muted"><i
-                                                            class="mdi mdi-checkbox-marked-circle-outline h6 text-primary mr-2"></i>
-                                                        Sed ut perspiciatis unde</p>
-                                                    <p class="text-muted"><i
-                                                            class="mdi mdi-checkbox-marked-circle-outline h6 text-primary mr-2"></i>
-                                                        Nemo enim ipsam voluptatem</p>
-                                                    <p class="text-muted"><i
-                                                            class="mdi mdi-checkbox-marked-circle-outline h6 text-primary mr-2"></i>
-                                                        Temporibus autem quibusdam et</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div>
-                                                    <p class="text-muted"><i
-                                                            class="mdi mdi-checkbox-marked-circle-outline h6 text-primary mr-2"></i>
-                                                        Itaque earum rerum hic</p>
-                                                    <p class="text-muted"><i
-                                                            class="mdi mdi-checkbox-marked-circle-outline h6 text-primary mr-2"></i>
-                                                        Donec quam felis ultricies nec</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-inline mb-4">
-                                            <label class="my-1 mr-2" for="quantityinput">Quantity</label>
-                                            <input name="qty" type="number" max="{{$product->product_stock}}" min="0"
-                                                class="form-control">
-                                        </div>
-
-                                        <div>
-                                            <button type="button" class="btn btn-danger mr-2"><i
-                                                    class="mdi mdi-heart-outline"></i></button>
-                                            <button type="submit" class="btn btn-success waves-effect waves-light">
-                                                <span class="btn-label"><i class="mdi mdi-cart"></i></span>Add to cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div> <!-- end col -->
-                            </div> <!-- end row -->
-                        </form>
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
+{{-- {{dd($product_picture)}} --}}
+<div class="container is-fluid mt-6">
+    <div class="columns">
+        <div class="column is-1by1 mx-2 my-2">
+            <div class="box px-0">
+                <figure class="image is-square">
+                    <img src="{{asset('backend/images/products_image/'.$main_picture->product_pict)}}">
+                </figure>
             </div>
+            <div class="columns is-centered my-4">
+                @foreach ($product_picture as $pp)
+                <div class="column is-narrow mr-1">
+                    <a href="#">
+                        <figure class="image is-64x64">
+                            <img src="{{asset('backend/images/products_image/'. $pp->product_pict)}}">
+                        </figure>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="column is-7 mx-2 my-2">
+            <form action="/add_cart/{{$product->product_id}}" method="post">
+                {{ csrf_field() }}
+                <p class="is-size-4 has-text-weight-bold"> {{$product->product_name}}</p>
+                <div class="columns">
+                    <div class="column is-2">
+                        <p class="my-3">Harga</p>
+                    </div>
+                    <hr>
+                    <div class="column is-6 ">
+                        <p class="my-3 is-size-4 has-text-weight-bold" style="color: #e6632c">
+                            Rp.{{number_format($product->product_price)}}</p>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-2">
+                        <p class="my-3">Jumlah</p>
+                    </div>
+                    <hr>
+                    <div class="column is-2">
+                        <input type="number" name="qty" id="" class="input is-primary" min="0" value="1">
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-2">
+                        <button type="submit" class="button is-primary">Add To Card</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

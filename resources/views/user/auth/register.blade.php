@@ -28,19 +28,19 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card mt-4">
-                    <div class="text-center mt-4">    
+                    <div class="text-center mt-4">
                         <h2>Daftar akun baru</h2>
                     </div>
-                    <form action="/register/post" method="post" id="formCheckPassword" class="m-5">
+                    <form action="/register/post" method="post" id="formCheckPassword" class="m-4">
                         {{ csrf_field() }}
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-md-6">
                                     <input name="first_name"
                                         class="form-control @if($errors->has('first_name')) is-invalid @endif"
-                                        type="text" id="fullname" placeholder="Nama Depan"
-                                        data-parsley-id="53" aria-describedby="data-parsley-id"
-                                        value="{{old('first_name')}}">
+                                        type="text" id="fullname" placeholder="Nama Depan" data-parsley-id="53"
+                                        aria-describedby="data-parsley-id" value="{{old('first_name')}}"
+                                        autocomplete="off">
                                     @if($errors->has('first_name'))
                                     <div class="invalid-feedback">
                                         {{$errors->first('first_name')}}
@@ -51,7 +51,7 @@
                                     <input name="last_name"
                                         class="form-control @if($errors->has('last_name')) is-invalid @endif"
                                         type="text" id="fullname" placeholder="Nama Belakang"
-                                        value="{{old('last_name')}}">
+                                        value="{{old('last_name')}}" autocomplete="off">
                                     @if($errors->has('last_name'))
                                     <div class="invalid-feedback">
                                         {{$errors->first('last_name')}}
@@ -63,7 +63,8 @@
                         </div>
                         <div class="form-group">
                             <input name="email" class="form-control @if($errors->has('email')) is-invalid @endif"
-                                type="email" id="emailaddress" placeholder="Email" value="{{old('email')}}">
+                                type="email" id="emailaddress" placeholder="Email" value="{{old('email')}}"
+                                autocomplete="off">
                             @if($errors->has('email'))
                             <div class="invalid-feedback">
                                 {{$errors->first('email')}}
@@ -71,9 +72,9 @@
                             @endif
                         </div>
                         <div class="form-group">
-                                <input name="password" type="password" id="password"
-                                    class="password form-control @if($errors->has('password')) is-invalid @endif"
-                                    placeholder="Password" value="{{old('password')}}">
+                            <input name="password" type="password" id="password"
+                                class="password form-control @if($errors->has('password')) is-invalid @endif"
+                                placeholder="Password" value="{{old('password')}}">
                             @if($errors->has('password'))
                             <div class="invalid-feedback">
                                 {{$errors->first('password')}}
@@ -81,9 +82,9 @@
                             @endif
                         </div>
                         <div class="form-group">
-                                <input name="confirm_password" type="password" id="cfmPassword"
-                                    class="form-control @if($errors->has('confirm_password')) is-invalid @endif"
-                                    placeholder="Konfirmasi password" value="{{old('confirm_password')}}">
+                            <input name="confirm_password" type="password" id="cfmPassword"
+                                class="form-control @if($errors->has('confirm_password')) is-invalid @endif"
+                                placeholder="Konfirmasi password" value="{{old('confirm_password')}}">
                             @if($errors->has('confirm_password'))
                             <div class="invalid-feedback">
                                 {{$errors->first('confirm_password')}}
@@ -110,7 +111,7 @@
                         <div class="form-group">
                             <input name="phone_number" type="num"
                                 class="form-control @if($errors->has('phone_number')) is-invalid @endif"
-                                placeholder="Nomor Handphone" value="{{old('phone_number')}}">
+                                placeholder="Nomor Handphone" value="{{old('phone_number')}}" autocomplete="off">
                             @if($errors->has('phone_number'))
                             <div class="invalid-feedback">
                                 {{$errors->first('phone_number')}}
@@ -130,13 +131,15 @@
                         </div>
                         <div class="separator mt-4"> ATAU </div>
                         <div class="form-group mb-0 text-center mt-4">
-                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-google mr-2"></i> Daftar dengan Google </a>
+                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-google mr-2"></i> Daftar dengan
+                                Google </a>
                         </div>
                         <div class="form-group mb-0 text-center mt-4">
-                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-facebook mr-2"></i> Daftar dengan Facebook </a>
+                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-facebook mr-2"></i> Daftar
+                                dengan Facebook </a>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>

@@ -29,10 +29,25 @@ class SiteController extends Controller
     public function product_detail($id)
     {
         $product = Products::find($id);
+        $product_picture = ProductPicture::where('product_id', $id);
+        $product_picture2 = ProductPicture::where('product_id', $id)->get();
         if (Session::has('login')) {
             $account = Session::get('account');
-            return view('user.product_detail', ['product' => $product, 'account' => $account]);
+            return view('user.product_detail', [
+                'product' => $product,
+                'account' => $account,
+                'main_picture' => $product_picture->first(),
+                'product_picture' => $product_picture2
+            ]);
         }
-        return view('user.product_detail', ['product' => $product]);
+        // dd($product_picture2);
+        return view(
+            'user.product_detail',
+            [
+                'product' => $product,
+                'main_picture' => $product_picture->first(),
+                'product_picture' => $product_picture2
+            ]
+        );
     }
 }

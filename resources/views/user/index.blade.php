@@ -1,41 +1,51 @@
 @extends('user.layouts.master')
 
 @section('content')
-<div class="content-page mt-4 bg-dark container">
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="row">
+<div class="container is-fluid columns">
+    <div class="column is-2">
+        <h2>Tes</h2>
+    </div>
+    <div class="column is-10">
+        <div class="container mt-4">
+            <div class="notification">
+                <div class="columns">
                     @foreach ($products as $p)
-                    <div class="col-md-6 col-xl-3">
-                        <a href="/product/detail/{{$p->product_id}}">
-                            <div class="card-box">
-                                <div class="bg-dark">
-                                    {{-- {{dd($p->product_picture[0]->product_pict)}} --}}
-                                    <img src="{{asset('backend/images/products_image/' . $p->product_picture[0]->product_pict)}}"
-                                        alt="product-pic" class="img-fluid" style="height: 250px">
+                    <div class="column is-one-fifth">
+                        <a href="/product/detail/{{$p->product_id}}" style="text-decoration: none;">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src={{asset('backend/images/products_image/' . $p->product_picture[0]->product_pict)}}
+                                            alt="Placeholder image">
+                                    </figure>
                                 </div>
-                                <div class="product-info">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h5 class="font-16 mt-0 sp-line-1"><a href="ecommerce-product-detail.html"
-                                                    class="text-dark">{{$p->product_name}}</a> </h5>
-                                            <div class="text-warning mb-2 font-13">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <h5 class="m-0"> <span class="text-muted"> Stocks :
-                                                    {{number_format($p->product_stock)}}</span></h5>
+                                <div class="card-content px-3">
+                                    <div class="media">
+                                        <div class="media-content">
+                                            <p class="is-size-7 mb-2">{{$p->product_name}}</p>
+                                            <p class="subtitle is-size-6 has-text-weight-semibold"
+                                                style="color: #e6632c">
+                                                <b>Rp.{{number_format($p->product_price)}}</b>
+                                            </p>
+                                            <span class="icon is-small has-text-warning">
+                                                <i class="fas fa-star fa-sm"></i>
+                                            </span>
+                                            <span class="icon is-small has-text-warning">
+                                                <i class="fas fa-star fa-sm"></i>
+                                            </span>
+                                            <span class="icon is-small has-text-warning">
+                                                <i class="fas fa-star fa-sm"></i>
+                                            </span>
+                                            <span class="icon is-small has-text-warning">
+                                                <i class="fas fa-star fa-sm"></i>
+                                            </span>
+                                            <span class="icon is-small has-text-warning">
+                                                <i class="fas fa-star fa-sm"></i>
+                                            </span>
                                         </div>
-                                        <div class="col-auto">
-                                            <h3 class="text-success">Rp. {{number_format($p->product_price)}}</h3>
-                                        </div>
-                                    </div> <!-- end row -->
-                                </div> <!-- end product info-->
-                            </div> <!-- end card-box-->
+                                    </div>
+                                </div>
+                            </div>
                         </a>
                     </div>
                     @endforeach
@@ -44,6 +54,9 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection
 @section('footer')
 <script>

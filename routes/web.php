@@ -27,6 +27,7 @@ Route::get('/cart', 'CartController@cart');
 Route::get('/cart/plus/{id}', 'CartController@plus_cart');
 Route::get('/cart/minus/{id}', 'CartController@minus_cart');
 Route::get('/cart/delete/{id}', 'CartController@cart_delete');
+Route::get('/checkout/payment', 'CheckoutController@payment');
 
 Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');

@@ -12,15 +12,8 @@
     <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
 
     <!-- App css -->
-    <link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"
-        id="bs-default-stylesheet" />
-    <link href="{{asset('backend/assets/css/app.min.css')}}" rel="stylesheet" type="text/css"
-        id="app-default-stylesheet" />
-
-    <link href="{{asset('backend/assets/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css"
-        id="bs-dark-stylesheet" disabled />
-    <link href="{{asset('backend/assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css"
-        id="app-dark-stylesheet" disabled />
+    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/custom_css.css')}}">
 
     <!-- Sweet Alert-->
     <link href="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
@@ -32,35 +25,14 @@
 
 <body class="auth-fluid-pages pb-0">
 
-    <div class="auth-fluid">
-        <!--Auth fluid left content -->
-        <div class="auth-fluid-form-box">
-            <div class="align-items-center d-flex h-100">
-                <div class="card-body">
-
-                    <!-- Logo -->
-                    <div class="auth-brand text-center text-lg-left">
-                        <div class="auth-logo">
-                            <a href="index.html" class="logo logo-dark text-center">
-                                <span class="logo-lg">
-                                    <img src="{{asset('backend/assets/images/logo-dark.png')}}" alt="" height="22">
-                                </span>
-                            </a>
-
-                            <a href="index.html" class="logo logo-light text-center">
-                                <span class="logo-lg">
-                                    <img src="{{asset('backend/assets/images/logo-light.png')}}" alt="" height="22">
-                                </span>
-                            </a>
-                        </div>
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card mt-4">
+                    <div class="text-center mt-4">
+                        <h2>Login</h2>
                     </div>
-
-                    <!-- title-->
-                    <h4 class="mt-0">Sign In</h4>
-                    <p class="text-muted mb-4">Enter your email address and password to access account.</p>
-
-                    <!-- form -->
-                    <form action="/login/post" method="post">
+                    <form action="/login/post" method="post" class="m-3">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="emailaddress">Email address</label>
@@ -71,14 +43,10 @@
                             <a href="auth-recoverpw-2.html" class="text-muted float-right"><small>Forgot your
                                     password?</small></a>
                             <label for="password">Password</label>
-                            <div class="input-group input-group-merge">
-                                <input name="password" type="password" id="password" class="form-control"
+                            <div class="input-group">
+                                <input name="password" type="password" class="form-control"
                                     placeholder="Enter your password">
-                                <div class="input-group-append" data-password="false">
-                                    <div class="input-group-text">
-                                        <span class="password-eye"></span>
-                                    </div>
-                                </div>
+                                {{-- <a href="#"><i class="fa fa-eye"></i></a> --}}
                             </div>
                         </div>
 
@@ -116,34 +84,10 @@
                             </ul>
                         </div>
                     </form>
-                    <!-- end form-->
 
-                    <!-- Footer-->
-                    <footer class="footer footer-alt">
-                        <p class="text-muted">Don't have an account? <a href="/register" class="text-muted ml-1"><b>Sign
-                                    Up</b></a></p>
-                    </footer>
-
-                </div> <!-- end .card-body -->
-            </div> <!-- end .align-items-center.d-flex.h-100-->
+                </div>
+            </div>
         </div>
-        <!-- end auth-fluid-form-box-->
-
-        <!-- Auth fluid right content -->
-        <div class="auth-fluid-right text-center">
-            <div class="auth-user-testimonial">
-                <h2 class="mb-3 text-white">I love the color!</h2>
-                <p class="lead"><i class="mdi mdi-format-quote-open"></i> I've been using your theme from the previous
-                    developer for our web app, once I knew new version is out, I immediately bought with no hesitation.
-                    Great themes, good documentation with lots of customization available and sample app that really fit
-                    our need. <i class="mdi mdi-format-quote-close"></i>
-                </p>
-                <h5 class="text-white">
-                    - Fadlisaad (Ubold Admin User)
-                </h5>
-            </div> <!-- end auth-user-testimonial-->
-        </div>
-        <!-- end Auth fluid right content -->
     </div>
     <!-- end auth-fluid-->
 
