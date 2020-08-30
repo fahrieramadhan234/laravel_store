@@ -41,7 +41,16 @@
     <div id="wrapper">
 
         <!-- Topbar Start -->
-        @include('user.layouts.navbar')
+
+        
+        @if (url()->current() != route('checkout_payment'))
+            @include('user.layouts.navbar')
+            @yield('content')
+            @include('user.layouts.footer')
+        @else
+            @yield('content')
+            @include('user.layouts.footer')
+        @endif
         <!-- end Topbar -->
 
 
@@ -49,12 +58,10 @@
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
-        @yield('content')
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->
 
-        @include('user.layouts.footer')
 
     </div>
     <!-- END wrapper -->

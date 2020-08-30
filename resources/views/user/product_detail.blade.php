@@ -6,7 +6,7 @@
     <div class="columns">
         <div class="column is-1by1 mx-2 my-2">
             <div class="box px-0">
-                <figure class="image is-square">
+                <figure class="image is-5by4">
                     <img src="{{asset('backend/images/products_image/'.$main_picture->product_pict)}}">
                 </figure>
             </div>
@@ -43,7 +43,7 @@
                     </div>
                     <hr>
                     <div class="column is-2">
-                        <input type="number" name="qty" id="" class="input is-primary" min="0" value="1">
+                    <input type="number" name="qty" id="" class="input is-primary" min="1" value="1" max={{$product->product_stock}}>
                     </div>
                 </div>
                 <div class="columns">

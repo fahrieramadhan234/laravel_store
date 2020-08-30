@@ -35,13 +35,14 @@
                 <div class="buttons">
                     <a href="/cart" class="mr-5">
                         @if (Session::has('cart'))
-                        <i class="fas fa-shopping-cart fa-lg"></i>
-                        <span class="badge badge-danger rounded-circle noti-icon-badge">
+                            @if (count(Session::get('cart')) >= 1 )
+                            <i class="fas fa-shopping-cart fa-lg"></i>
                             <span class="tag is-danger">{{count(Session::get('cart'))}}</span>
-                        </span>
+                            @else
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                            @endif
                         @else
-                        <i class="fas fa-shopping-cart fa-lg"></i><span
-                            class="badge rounded-circle badge-danger"></span>
+                        <i class="fas fa-shopping-cart fa-lg">
                         @endif
                     </a>
                     @if (Session::has('login'))

@@ -58,6 +58,11 @@ class CartController extends Controller
     public function plus_cart($id)
     {
         $cart = Session::get('cart');
+        $product = Products::find($id);
+
+        if ($cart[$id]['quantity'] == $product->product_stock) {
+            return redirect('/cart')->with('Error', "Quantity tidak bisa melebihi stock produk");
+        }
 
         $cart[$id]['quantity'] += 1;
         Session::put('cart', $cart);
@@ -71,7 +76,7 @@ class CartController extends Controller
         if ($cart[$id]['quantity'] == 1) {
             unset($cart[$id]);
             Session::put('cart', $cart);
-            return redirect('/cart');
+            return redirect('/cart')->with('Success', 'Product deleted from cart successfully!');
         }
 
         $cart[$id]['quantity'] -= 1;

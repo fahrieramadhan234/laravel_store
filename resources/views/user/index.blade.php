@@ -22,11 +22,16 @@
                                 <div class="card-content px-3">
                                     <div class="media">
                                         <div class="media-content">
-                                            <p class="is-size-7 mb-2">{{$p->product_name}}</p>
-                                            <p class="subtitle is-size-6 has-text-weight-semibold"
+                                            <p class="is-size-7 has-text-weight-semibold mb-2">{{$p->product_name}}</p>
+                                            <p class="is-size-6 has-text-weight-semibold mb-2"
                                                 style="color: #e6632c">
                                                 <b>Rp.{{number_format($p->product_price)}}</b>
                                             </p>
+                                            @if ($p->product_stock <= 10)
+                                            <p>
+                                                <span class="tag is-danger mb-2">Stock left: {{$p->product_stock}}</span>
+                                            </p>
+                                            @endif
                                             <span class="icon is-small has-text-warning">
                                                 <i class="fas fa-star fa-sm"></i>
                                             </span>
