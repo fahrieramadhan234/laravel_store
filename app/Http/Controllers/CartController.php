@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+
+    public function cart()
+    {
+        if (!Session::has('login')) {
+            return back()->with('Warning', 'You must login first');
+        }
+        $account = Session::get('account');
+        $cart = session('cart');
+        // dd($cart);
+        return view('user.cart', ['account' => $account, 'cart' => $cart]);
+    }
+
     public function addCart(Request $request, $id)
     {
         if (!Session::has('login')) {
@@ -93,16 +105,5 @@ class CartController extends Controller
         Session::put('cart', $cart);
 
         return redirect('/cart')->with('Success', 'Product deleted from cart successfully!');
-    }
-
-    public function cart()
-    {
-        if (!Session::has('login')) {
-            return back()->with('Warning', 'You must login first');
-        }
-        $account = Session::get('account');
-        $cart = session('cart');
-        // dd($cart);
-        return view('user.cart', ['account' => $account, 'cart' => $cart]);
     }
 }

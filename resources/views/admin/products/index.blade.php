@@ -281,8 +281,8 @@
 <script>
     $(document).ready( function () {
         $('.delete').click(function(){
-            var id = $(this).attr('product-id');
-            var name = $(this).attr('product-name');
+            const id = $(this).attr('product-id');
+            const name = $(this).attr('product-name');
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Are you sure want to delete this product ?",

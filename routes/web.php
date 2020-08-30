@@ -28,6 +28,8 @@ Route::get('/cart/plus/{id}', 'CartController@plus_cart');
 Route::get('/cart/minus/{id}', 'CartController@minus_cart');
 Route::get('/cart/delete/{id}', 'CartController@cart_delete');
 Route::get('/checkout/payment', 'CheckoutController@payment')->name('checkout_payment');
+Route::post('/checkout/add_address', 'CheckoutController@add_address');
+Route::get('/checkout_delete_session', 'CheckoutController@delete_session');
 
 Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');
