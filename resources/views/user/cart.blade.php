@@ -26,14 +26,14 @@
                         <div class="columns buttons has-addons is-pulled-right">
                             <div class="column is-vcentered">
                                 <a href="#" class="mr-4 hapus" product-id="{{$detail['product_id']}}">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash has-text-secondary"></i>
                                 </a>
                                 <a href="/cart/minus/{{$detail['product_id']}}" class="minus-qty my-2">
                                     <i class="fas fa-minus-circle"></i>
                                 </a>
                                 <input name="qty" type="text" min="1" value="{{$detail['quantity']}}"
                                     class="input is-small" placeholder="Qty" style="width: 90px; text-align: center">
-                                <a href="/cart/plus/{{$detail['product_id']}}" class="plus-qty">
+                                <a href="/cart/plus/{{$detail['product_id']}}" class="plus-qty has-text-primary">
                                     <i class="fas fa-plus-circle"></i>
                                 </a>
                             </div>
@@ -84,8 +84,9 @@
             if ( val == 0 ) return;
             inpt.val(val-1);
         });
-        $('.hapus').click( () => {
+        $('.hapus').click( function () {
             const id = $(this).attr('product-id')
+            console.log(id)
             Swal.fire({
                 title: 'Hapus produk dari keranjang ?',
                 text: 'Yakin ingin hapus produk dari keranjang ?',

@@ -35,14 +35,14 @@
                 <div class="buttons">
                     <a href="/cart" class="mr-5">
                         @if (Session::has('cart'))
-                            @if (count(Session::get('cart')) >= 1 )
-                            <i class="fas fa-shopping-cart fa-lg"></i>
-                            <span class="tag is-danger">{{count(Session::get('cart'))}}</span>
-                            @else
-                            <i class="fas fa-shopping-cart fa-lg"></i>
-                            @endif
+                        @if (count(Session::get('cart')) >= 1)
+                        <i class="fas fa-shopping-cart fa-lg" data-notifications={{count(Session::get('cart'))}}></i>
+                        {{-- <span class="tag is-danger">{{count(Session::get('cart'))}}</span> --}}
                         @else
-                        <i class="fas fa-shopping-cart fa-lg">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        @endif
+                        @else
+                        <i class="fas fa-shopping-cart fa-lg"></i>
                         @endif
                     </a>
                     @if (Session::has('login'))

@@ -21,6 +21,7 @@
     {{-- <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('frontend/bulma/css/bulma.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/bulma/custom.css')}}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- icons -->
     <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
@@ -34,22 +35,21 @@
 
 </head>
 
-<body data-layout-mode="horizontal"
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "topbar": {"color": "dark"}}'>
+<body>
 
     <!-- Begin page -->
     <div id="wrapper">
 
         <!-- Topbar Start -->
 
-        
+
         @if (url()->current() != route('checkout_payment'))
-            @include('user.layouts.navbar')
-            @yield('content')
-            @include('user.layouts.footer')
+        @include('user.layouts.navbar')
+        @yield('content')
+        @include('user.layouts.footer')
         @else
-            @yield('content')
-            @include('user.layouts.footer')
+        @yield('content')
+        @include('user.layouts.footer')
         @endif
         <!-- end Topbar -->
 

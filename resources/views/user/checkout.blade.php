@@ -3,11 +3,6 @@
 @section('content')
 <div class="container is-fluid my-4">
     <div class="columns">
-        @if (session('cart'))
-        <?php $totalHarga = 0; ?>
-        @foreach (session('cart') as $key => $detail)
-        <?php $total = $detail['product_price'] * $detail['quantity']; ?>
-
         <div class="column is-8 has-background-primary pl-10">
             <p class="is-size-4 my-4"><strong>Checkout</strong></p>
             <div class="box">
@@ -24,14 +19,35 @@
                     alamat</a>
                 @endif
             </div>
+            @if (session('cart'))
+            <?php $totalHarga = 0; ?>
+            @foreach (session('cart') as $key => $detail)
+            <?php $total = $detail['product_price'] * $detail['quantity']; ?>
+            <div class="box">
+                <div class="columns">
+                    <div class="column is-2 is-dekstop level-right has-background-primary">
+                        <img src={{asset('backend/images/products_image/'.$detail['product_picture']->product_pict)}}
+                            class="image is-64x64 is-centered">
+                    </div>
+                    <div class="column is-6 has-background-info">
+                        <p class="mb-2 has-text-weight-bold">{{$detail['product_name']}}</p>
+                        <p class="is-size-6 has-text-weight-bold" style="color: #e6632c">
+                            Rp.{{number_format($detail['product_price'])}}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            <?php $totalHarga+=$total; ?>
+            <div class="box">
+
+            </div>
         </div>
-        <?php $totalHarga+=$total; ?>
-        @endforeach
         <div class="column is-4 has-background-info">
             <div class="box my-20">
                 <p>Ringkasan Belanja</p>
                 <p>Total Harga ({{count(Session::get('cart'))}} Produk)</p>
                 <span>Rp.{{number_format($totalHarga)}}</span>
+                <p><a href="#" class="button is-primary">Pilih Pembayaran</a></p>
             </div>
         </div>
         @endif

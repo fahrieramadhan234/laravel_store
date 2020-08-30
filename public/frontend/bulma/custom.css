@@ -20,3 +20,21 @@
 .table-cart {
     width: 100%;
 }
+
+[data-notifications] {
+    position: relative;
+}
+
+[data-notifications]:after {
+    font-family: "Sans-serif";
+    font-size: 14px;
+    content: attr(data-notifications);
+    position: absolute;
+    background: red;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 0.3em;
+    color: #f2f2f2;
+    right: -15px;
+    top: -15px;
+}
