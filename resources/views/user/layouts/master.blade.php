@@ -43,7 +43,7 @@
         <!-- Topbar Start -->
 
 
-        @if (url()->current() != route('checkout_payment'))
+        @if (url()->current() != route('checkout_shipment'))
         @include('user.layouts.navbar')
         @yield('content')
         @include('user.layouts.footer')

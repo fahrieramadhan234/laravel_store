@@ -56,7 +56,7 @@
                             style="color: #e6632c">Rp.{{number_format($totalHarga)}}</span>
                     </div>
                 </div>
-                <a href="/checkout/payment" class="button is-primary is-right">Checkout
+                <a href="/checkout/shipment" class="button is-primary is-right">Checkout
                     ({{count(Session::get('cart'))}})</a>
             </div>
         </div>

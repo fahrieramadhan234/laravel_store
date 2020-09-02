@@ -58,12 +58,18 @@
     padding-right: 30px;
     width: 100%;
 }
+
 #input_img {
     position: absolute;
     bottom: 2px;
     right: 5px;
     width: 24px;
     height: 24px;
+}
+
+.select,
+.select select {
+    width: 100%;
 }
 
 input {

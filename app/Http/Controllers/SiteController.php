@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Address\Provinces;
 use App\Models\ProductPicture;
 use Illuminate\Http\Request;
 use App\Models\Products;
@@ -13,8 +12,6 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $address = Provinces::all();
-        // dd($address);
         $products = Products::all()->where('product_stock', '>', 0);
         if (Session::has('login')) {
             $account = Session::get('account');

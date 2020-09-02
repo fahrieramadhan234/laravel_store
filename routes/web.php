@@ -1,5 +1,6 @@
 <?php
 
+use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,13 +24,18 @@ Route::get('/logout', 'UserAuthController@logout');
 
 Route::get('/product/detail/{id}', 'SiteController@product_detail');
 Route::post('/add_cart/{id}', 'CartController@addCart');
-Route::get('/cart', 'CartController@cart');
+Route::get('/cart', 'CartController@cart')->name('cart');
 Route::get('/cart/plus/{id}', 'CartController@plus_cart');
 Route::get('/cart/minus/{id}', 'CartController@minus_cart');
 Route::get('/cart/delete/{id}', 'CartController@cart_delete');
-Route::get('/checkout/payment', 'CheckoutController@payment')->name('checkout_payment');
-Route::post('/checkout/add_address', 'CheckoutController@add_address');
-Route::get('/checkout_delete_session', 'CheckoutController@delete_session');
+
+Route::get('/checkout/shipment', 'ShipmentController@getProvince')->name("checkout_shipment");
+Route::get('/checkout/shipment/get-city/{id}', 'ShipmentController@getCity');
+Route::get('/checkout/shipment/get-district/{id}', 'ShipmentController@getDistrict');
+Route::get('/checkout/shipment/get-village/{id}', 'ShipmentController@getVillage');
+Route::post('/checkout/add_address', 'ShipmentController@add_address');
+Route::get('/checkout_delete_session', 'ShipmentController@delete_session');
+
 
 Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');

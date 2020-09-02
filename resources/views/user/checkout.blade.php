@@ -12,8 +12,9 @@
                 <?php $data = Session::get('address') ?>
                 <p>{{$data['nama_penerima']}}</p>
                 <p>{{$data['no_telp']}}</p>
-                <p>{{$data['alamat']}} {{$data['kota']}} {{$data['kode_pos']}}</p>
-                <a href="/checkout_delete_session" class="button is-primary">Delete Session Alamat</a>
+                <p>{{$data['alamat']}} {{$data['village']}} {{$data['district']}} - {{$data['city']}} - {{$data['province']}}</p>
+                <a href="#" class="button is-primary my-4" data-toggle="modal" data-target="#modal-alamat">Ganti
+                    alamat</a>
                 @else
                 <a href="#" class="button is-primary my-4" data-toggle="modal" data-target="#modal-alamat">Tambahkan
                     alamat</a>
@@ -25,11 +26,12 @@
             <?php $total = $detail['product_price'] * $detail['quantity']; ?>
             <div class="box">
                 <div class="columns">
-                    <div class="column is-2 is-dekstop level-right has-background-primary">
-                        <img src={{asset('backend/images/products_image/'.$detail['product_picture']->product_pict)}}
-                            class="image is-64x64 is-centered">
+                    <div class="column is-2 card-content is-flex level-item has-text-centered">
+                        <figure class="image is-64x64 is-inline-block">
+                            <img class="image is-64x64" src={{asset('backend/images/products_image/'.$detail['product_picture']->product_pict)}}>
+                        </figure>
                     </div>
-                    <div class="column is-6 has-background-info">
+                    <div class="column is-6 ">
                         <p class="mb-2 has-text-weight-bold">{{$detail['product_name']}}</p>
                         <p class="is-size-6 has-text-weight-bold" style="color: #e6632c">
                             Rp.{{number_format($detail['product_price'])}}</p>
@@ -47,7 +49,7 @@
                 <p>Ringkasan Belanja</p>
                 <p>Total Harga ({{count(Session::get('cart'))}} Produk)</p>
                 <span>Rp.{{number_format($totalHarga)}}</span>
-                <p><a href="#" class="button is-primary">Pilih Pembayaran</a></p>
+                <p><a href="#" class="button is-primary mt-4">Pilih Pembayaran</a></p>
             </div>
         </div>
         @endif
@@ -77,16 +79,51 @@
                     </div>
                 </div>
                 <div class="field">
-                    <div class="columns">
-                        <div class="column is-9">
-                            <label for="">Kota atau Kabupaten</label>
-                            <input type="text" name="kota" class="input is-primary">
-                        </div>
-                        <div class="column is-3">
-                            <label for="">Kode Pos</label>
-                            <input type="number" name="kode_pos" class="input is-primary">
+                    <label class="">Provinsi</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                          <select name="province" id="province" >
+                            <option value="">Pilih provinsi</option>
+                            @foreach ($provinces as $id => $name)
+                            <option value="{{ $id }}">{{$name}}</option>
+                            @endforeach
+                          </select>
                         </div>
                     </div>
+                </div>
+                <div class="field">
+                    <label class="">Kota</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                          <select name="city" id="city" >
+                            <option value="">Pilih Kota</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="">Kecamatan</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                          <select name="district" id="district" >
+                            <option value="">Pilih Kecamatan</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="">Kelurahan</label>
+                    <div class="control">
+                        <div class="select is-primary">
+                          <select name="village" id="village" >
+                            <option value="">Pilih Kelurahan</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="">Kode Pos</label>
+                    <input type="number" name="kode_pos" class="input is-primary">
                 </div>
                 <div class="field">
                     <label class="">Alamat Lengkap</label>
@@ -108,12 +145,73 @@
 
 @section('footer')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function (){
+        $('#province').on('change', function () {
+            console.log($(this).val())
+            let id = $(this).val();
+            $('#city').empty();
+            $('#city').append(`<option value="0" disable selected> Processing...</option>`);
+            $.ajax({
+                type: 'GET',
+                url: '/checkout/shipment/get-city/' + id,
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    $('#city').empty();
+                    $('#city').append(`<option value="0" disable selected> Pilih Kota...</option>`);
+                    $.each(data, function(index, value) {
+                        $('#city').append(`<option value=${value['id']}> ${value['name']}</option>`)
+                    })
+                }
+            })
+        })
+
+        $('#city').on('change', function () {
+            console.log($(this).val())
+            let id = $(this).val();
+            $('#district').empty();
+            $('#district').append(`<option value="0" disable selected> Processing...</option>`);
+            $.ajax({
+                type: 'GET',
+                url: '/checkout/shipment/get-district/' + id,
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    $('#district').empty();
+                    $('#district').append(`<option value="0" disable selected> Pilih Kecamatan...</option>`);
+                    $.each(data, function(index, value) {
+                        $('#district').append(`<option value=${value['id']}> ${value['name']}</option>`)
+                    })
+                }
+            })
+        })
+
+        $('#district').on('change', function () {
+            console.log($(this).val())
+            let id = $(this).val();
+            $('#village').empty();
+            $('#village').append(`<option value="0" disable selected> Processing...</option>`);
+            $.ajax({
+                type: 'GET',
+                url: '/checkout/shipment/get-village/' + id,
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    $('#village').empty();
+                    $('#village').append(`<option value="0" disable selected> Pilih Kecamatan...</option>`);
+                    $.each(data, function(index, value) {
+                        $('#village').append(`<option value=${value['id']}> ${value['name']}</option>`)
+                    })
+                }
+            })
+        })
+    })
+</script>
 <script>
     $(document).ready(function() {
-        $('.field input, textarea').on('keyup', function() {
+        $('.field input').on('keyup', function() {
             let empty = false;
 
-            $('.field input, textarea').each(function() {
+            $('.field input').each(function() {
             empty = $(this).val().length == 0;
             });
 
