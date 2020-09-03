@@ -58,7 +58,7 @@
 
 <div id="modal-alamat" class="modal">
     <div class="modal-background"></div>
-    <div class="modal-card">
+    <div class="modal-card mt-4">
         <header class="modal-card-head">
             <p class="modal-card-title">Modal title</p>
             <button class="delete" aria-label="close" data-dismiss="modal"></button>
@@ -82,10 +82,10 @@
                     <label class="">Provinsi</label>
                     <div class="control">
                         <div class="select is-primary">
-                          <select name="province" id="province" >
+                          <select name="province" id="province">
                             <option value="">Pilih provinsi</option>
-                            @foreach ($provinces as $id => $name)
-                            <option value="{{ $id }}">{{$name}}</option>
+                            @foreach ($rj as $rj)
+                            <option value="{{ $rj['province_id']}}">{{$rj['province']}}</option>
                             @endforeach
                           </select>
                         </div>
@@ -161,7 +161,7 @@
                     $('#city').empty();
                     $('#city').append(`<option value="0" disable selected> Pilih Kota...</option>`);
                     $.each(data, function(index, value) {
-                        $('#city').append(`<option value=${value['id']}> ${value['name']}</option>`)
+                        $('#city').append(`<option value=${value['city_id']}> ${value['city_name']}</option>`)
                     })
                 }
             })

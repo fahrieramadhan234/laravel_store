@@ -9,26 +9,41 @@ use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
+use Illuminate\Support\Facades\Http;
 
 class ShipmentController extends Controller
 {
 
+    protected $raja_ongkir_url;
+    protected $api_key;
+    
+    public function __construct()
+    {
+        $this->api_key = config('services.raja_ongkir.key'); // Get Api key from .env
+        $this->raja_ongkir_url = 'https://api.rajaongkir.com/starter/'; // Url for raja ongkir
+    }
+
     public function getProvince()
     {
-        // dd(Session::get('address'));
+        
+        $response = Http::get($this->raja_ongkir_url.'province?key='.$this->api_key);
+        $rj = $response['rajaongkir']['results'];
         $provinces = Province::pluck('name', 'id');
-        $city = City::where('province_id', 12)->get();
         if (Session::has('login')) {
             $account = Session::get('account');
-            return view('user.checkout', ['account' => $account, 'provinces' => $provinces]);
+            return view('user.checkout', ['account' => $account, 'provinces' => $provinces, 'rj' => $rj]);
         }
         return view('user.checkout');
     }
 
     public function getCity($id)
     {
+
+        $response = Http::get($this->raja_ongkir_url.'city?key='.$this->api_key.'&province=' . $id);
+        $rj = $response['rajaongkir']['results'];
+        // dd($rj);
         $city = City::where('province_id', $id)->get();
-        echo json_encode($city);
+        echo json_encode($rj);
     }
 
     public function getDistrict($id)
