@@ -43,6 +43,7 @@ class CartController extends Controller
                     'product_name' => $product->product_name,
                     'quantity' => (int)$request->qty,
                     'product_price' => $product->product_price,
+                    'product_weight' => $product->product_weight,
                     'product_picture' => $product_picture
                 ]
             ];
@@ -61,6 +62,7 @@ class CartController extends Controller
             'product_name' => $product->product_name,
             'quantity' => (int)$request->qty,
             'product_price' => $product->product_price,
+            'product_weight' => $product->product_weight,
             'product_picture' => $product_picture
         );
         Session::put('cart', $cart);

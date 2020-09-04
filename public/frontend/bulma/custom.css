@@ -38,3 +38,8 @@
     right: -15px;
     top: -15px;
 }
+
+.select,
+select {
+    width: 100%;
+}

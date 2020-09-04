@@ -29,12 +29,16 @@ Route::get('/cart/plus/{id}', 'CartController@plus_cart');
 Route::get('/cart/minus/{id}', 'CartController@minus_cart');
 Route::get('/cart/delete/{id}', 'CartController@cart_delete');
 
-Route::get('/checkout/shipment', 'ShipmentController@getProvince')->name("checkout_shipment");
+Route::get('/checkout/shipment', 'ShipmentController@checkout')->name("checkout_shipment");
+Route::get('/checkout/shipment/get-province/', 'ShipmentController@getProvince');
 Route::get('/checkout/shipment/get-city/{id}', 'ShipmentController@getCity');
+Route::get('/checkout/shipment/get-ongkir', 'ShipmentController@getOngkir');
 Route::get('/checkout/shipment/get-district/{id}', 'ShipmentController@getDistrict');
 Route::get('/checkout/shipment/get-village/{id}', 'ShipmentController@getVillage');
 Route::post('/checkout/add_address', 'ShipmentController@add_address');
 Route::get('/checkout_delete_session', 'ShipmentController@delete_session');
+
+Route::get('/origin={city_origin}&destination={city_destination}&weight={weight}&courier={courier}', 'ShipmentController@getOngkir');
 
 
 Route::get('/admin/login', 'AuthController@index')->name('login');
