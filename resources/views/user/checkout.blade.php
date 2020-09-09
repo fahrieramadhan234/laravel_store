@@ -92,7 +92,7 @@
                         <p class="mt-4 has-text-weight-bold">Total pembayaran</p>
                     </div>
                     <div class="column is-6">
-                        <p id="total-harga">Rp.{{number_format($totalHarga)}}</p>
+                        <p id="total-harga">Rp.{{$totalHarga}}</p>
                         <p class="" id="total-ongkir"> - </p>
                         <p class="has-text-weight-bold mt-4" id="total-pembayaran"></p>
                     </div>
@@ -261,9 +261,10 @@
 
         $('#service').on('change', function () {
             let ongkir = $(this).find(':selected').attr('ongkir');
-            let total_harga = $('#total-harga').val();
-            let total_pembayaran = ongkir + total_harga;
-            console.log(total_harga)
+            let total_harga = $('#total-harga').text();
+            let total_harga2 = total_harga.substring(3, total_harga.length + 1)
+            let total_pembayaran = parseInt(ongkir) + parseInt(total_harga2);
+            console.log(total_harga2)
             $('#total-ongkir').empty();
             $('#total-ongkir').text('Rp.' + ongkir);
             $('#total-pembayaran').text('Rp.'+ total_pembayaran)
