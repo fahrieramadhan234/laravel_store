@@ -103,7 +103,20 @@ class ShipmentController extends Controller
 
         Session::get('address');
 
-        Session::put('address', $request->all());
+        $address = [
+            'nama_penerima' => $request->nama_penerima,
+            'no_telp' => $request->no_telp,
+            'province' => $request->province,
+            'province_name' => $request->province_name,
+            'city' => $request->city,
+            'city_name' => $request->city_name,
+            'kode_pos' => $request->kode_pos,
+            'alamat' => $request->alamat,
+        ];
+
+        Session::put('address', $address);
+
+        // Session::put('address', $request->all());
         return redirect('/checkout/shipment');
     }
 

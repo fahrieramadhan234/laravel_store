@@ -41,6 +41,7 @@ class ProductsController extends Controller
             'category_id' => 'required',
             'product_price' => 'required|integer',
             'product_stock' => 'required|integer',
+            'prodcut_weight' => 'required|integer',
             'product_desc' => 'required',
             // 'product_pict' => 'required|mimes:jpg,jpeg,png',
         ], $message);
@@ -51,6 +52,7 @@ class ProductsController extends Controller
         $product->category_id = $request->category_id;
         $product->product_price = $request->product_price;
         $product->product_stock = $request->product_stock;
+        $product->product_weight = $request->product_weight;
         $product->product_desc = $request->product_desc;
         $product->save();
 
@@ -62,7 +64,7 @@ class ProductsController extends Controller
             $product_picture = new \App\Models\ProductPicture;
             $request->request->add(['product_id' => $product->product_id]);
             $get_name = $pro_pict->getClientOriginalName();
-            $pict_name = time() . '-' . $get_name;
+            $pict_name = time() . '-' . str_replace(" ", "_", $get_name);
             $pro_pict->move('backend/images/products_image/', $pict_name);
             $product_picture->product_pict = $pict_name;
             $product_picture->product_id = $request->product_id;
@@ -127,7 +129,7 @@ class ProductsController extends Controller
         $product_picture = ProductPicture::where('product_id', $id);
         $picture_name = $product_picture->pluck('product_pict');
         $pict = public_path() . '/backend/images/products_image/' . $picture_name;
-        // dd($picture_name);
+        // dd($pict);
         if ($product->product_stock >= 30) {
             $stock = "Ready Stok";
         } elseif ($product->product_stock >= 1 && $product->product_stock < 30) {

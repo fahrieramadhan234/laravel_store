@@ -67,6 +67,11 @@
                                         value="{{$product->product_stock}}">
                                 </div>
                                 <div class="form-group">
+                                    <label for="weight">Weight</label><span class="text-danger">*</span>
+                                    <input type="text" name="weight" class="form-control" placeholder="Weight (gram)"
+                                        value="{{$product->product_weight}}">
+                                </div>
+                                <div class="form-group">
                                     <label for="nama">Description</label><span class="text-danger">*</span>
                                     <textarea name="product_desc" cols="30" rows="10"
                                         class="form-control">{{$product->product_desc}}</textarea>

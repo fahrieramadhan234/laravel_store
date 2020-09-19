@@ -11,6 +11,34 @@
                     </a>
                 </li>
 
+                <li class="menu-title mt-2">Order</li>
+                <li>
+                    <a href="#sidebarMultilevel" data-toggle="collapse">
+                        <i data-feather="archive"></i>
+                        <span> Products </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarMultilevel">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="/admin/products">
+                                    Data Orders
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/brands">
+                                    Data Brands
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/categories">
+                                    Data Categories
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title mt-2">Apps</li>
                 <li>
                     <a href="#sidebarMultilevel" data-toggle="collapse">

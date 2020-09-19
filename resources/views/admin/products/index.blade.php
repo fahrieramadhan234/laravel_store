@@ -217,6 +217,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="weight">Weight</label>
+                            <input type="text" name="weight"
+                                class="form-control @if($errors->has('product_weight')) parsley-error" @endif
+                                placeholder="Weight (gram)" value="{{old('product_weight')}}">
+                        </div>
+                        <div class="form-group">
                             <label for="nama">Description</label>
                             <textarea name="product_desc" cols="30" rows="10"
                                 class="form-control @if($errors->has('product_desc')) parsley-error @endif">{{old('product_desc')}}</textarea>

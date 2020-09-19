@@ -21,15 +21,18 @@
     {{-- <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('frontend/bulma/css/bulma.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/bulma/custom.css')}}">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- icons -->
     <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 
+    {{-- Tailwind Css --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom_css.css') }}" rel="stylesheet">
+
     <!-- Sweet Alert-->
     <link href="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/app.css')}}"> --}}
 
     @yield('header')
 
@@ -43,14 +46,18 @@
         <!-- Topbar Start -->
 
 
-        @if (url()->current() != route('checkout_shipment'))
-        @include('user.layouts.navbar')
+        @if (url()->current() == route('payment'))
+        @yield('content')
+        @include('user.layouts.footer')
+        @elseif(url()->current() == route('payment'))
         @yield('content')
         @include('user.layouts.footer')
         @else
+        @include('user.layouts.navbar')
         @yield('content')
         @include('user.layouts.footer')
         @endif
+
         <!-- end Topbar -->
 
 
@@ -66,7 +73,7 @@
     </div>
     <!-- END wrapper -->
 
-
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 
     <!-- Vendor js -->
     <script src="{{asset('backend/assets/js/vendor.min.js')}}"></script>

@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Categories;
 use FontLib\Table\Type\name;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +22,14 @@ Route::post('/login/post', 'UserAuthController@login_post');
 Route::get('/register', 'UserAuthController@register');
 Route::post('/register/post', 'UserAuthController@register_post');
 Route::get('/logout', 'UserAuthController@logout');
+Route::get('/search', 'SiteController@search');
+
+// Route::get('/register', function (Request $request) {
+//     dd($request->getContent());
+// });
+// Route::get('/get-category', function () {
+//     return Categories::all();
+// });
 
 
 Route::get('/product/detail/{id}', 'SiteController@product_detail');
@@ -37,6 +47,7 @@ Route::get('/checkout/shipment/get-district/{id}', 'ShipmentController@getDistri
 Route::get('/checkout/shipment/get-village/{id}', 'ShipmentController@getVillage');
 Route::post('/checkout/add_address', 'ShipmentController@add_address');
 Route::get('/checkout_delete_session', 'ShipmentController@delete_session');
+Route::get('/payment', 'PaymentController@index')->name("payment");
 
 Route::get('/origin={city_origin}&destination={city_destination}&weight={weight}&courier={courier}', 'ShipmentController@getOngkir');
 

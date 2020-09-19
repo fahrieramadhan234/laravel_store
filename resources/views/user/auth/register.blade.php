@@ -13,8 +13,9 @@
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
 
     <!-- App css -->
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/custom_css.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/custom_css.css')}}"> --}}
 
 
     <!-- icons -->
@@ -24,124 +25,73 @@
 
 <body>
 
-    <div class="container-fluid mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card mt-4">
-                    <div class="text-center mt-4">
-                        <h2>Daftar akun baru</h2>
+    <div class="flex justify-center my-6">
+        <div class="w-1/3 bg-white rounded-lg shadow-outline p-6">
+            <p class="text-center text-xl">Register</p>
+            <form action="/register/post" method="post" class="my-6" id="formCheckPassword">
+                {{ csrf_field() }}
+                <div class="flex my-3">
+                    <div class="mr-1">
+                        <input
+                            class="shadow appearance-none border @if($errors->has('first_name')) border-red-500 @endif rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="firstname" type="text" placeholder="Nama Depan" name="first_name">
+                        @if($errors->has('first_name'))
+                        <p class="text-red-500 text-xs italic">{{$errors->first('first_name')}}</p>
+                        @endif
                     </div>
-                    <form action="/register/post" method="post" id="formCheckPassword" class="m-4">
-                        {{ csrf_field() }}
-                        <div class="form-group ">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input name="first_name"
-                                        class="form-control @if($errors->has('first_name')) is-invalid @endif"
-                                        type="text" id="fullname" placeholder="Nama Depan" data-parsley-id="53"
-                                        aria-describedby="data-parsley-id" value="{{old('first_name')}}"
-                                        autocomplete="off">
-                                    @if($errors->has('first_name'))
-                                    <div class="invalid-feedback">
-                                        {{$errors->first('first_name')}}
-                                    </div>
-                                    @endif
-                                </div>
-                                <div class="col-md-6">
-                                    <input name="last_name"
-                                        class="form-control @if($errors->has('last_name')) is-invalid @endif"
-                                        type="text" id="fullname" placeholder="Nama Belakang"
-                                        value="{{old('last_name')}}" autocomplete="off">
-                                    @if($errors->has('last_name'))
-                                    <div class="invalid-feedback">
-                                        {{$errors->first('last_name')}}
-                                    </div>
-                                    @endif
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input name="email" class="form-control @if($errors->has('email')) is-invalid @endif"
-                                type="email" id="emailaddress" placeholder="Email" value="{{old('email')}}"
-                                autocomplete="off">
-                            @if($errors->has('email'))
-                            <div class="invalid-feedback">
-                                {{$errors->first('email')}}
-                            </div>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <input name="password" type="password" id="password"
-                                class="password form-control @if($errors->has('password')) is-invalid @endif"
-                                placeholder="Password" value="{{old('password')}}">
-                            @if($errors->has('password'))
-                            <div class="invalid-feedback">
-                                {{$errors->first('password')}}
-                            </div>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <input name="confirm_password" type="password" id="cfmPassword"
-                                class="form-control @if($errors->has('confirm_password')) is-invalid @endif"
-                                placeholder="Konfirmasi password" value="{{old('confirm_password')}}">
-                            @if($errors->has('confirm_password'))
-                            <div class="invalid-feedback">
-                                {{$errors->first('confirm_password')}}
-                            </div>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check form-check-inline @if($errors->has('sex')) is-invalid @endif">
-                                <input class="form-check-input" type="radio" id="male" value="M" name="sex"
-                                    @if(old('sex')) checked @endif>
-                                <label class="form-check-label" for="male"> Laki-laki </label>
-                            </div>
-                            <div class="form-check form-check-inline @if($errors->has('sex')) is-invalid @endif">
-                                <input class="form-check-input" type="radio" id="female" value="F" name="sex"
-                                    @if(old('sex')) checked @endif>
-                                <label class="form-check-label" for="female"> Perempuan </label>
-                            </div>
-                            @if($errors->has('sex'))
-                            <div class="invalid-feedback">
-                                {{$errors->first('sex')}}
-                            </div>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <input name="phone_number" type="num"
-                                class="form-control @if($errors->has('phone_number')) is-invalid @endif"
-                                placeholder="Nomor Handphone" value="{{old('phone_number')}}" autocomplete="off">
-                            @if($errors->has('phone_number'))
-                            <div class="invalid-feedback">
-                                {{$errors->first('phone_number')}}
-                            </div>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkbox-signup">
-                                <label class="custom-control-label" for="checkbox-signup">I accept <a
-                                        href="javascript: void(0);" class="text-dark">Terms and
-                                        Conditions</a></label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-0 text-center">
-                            <button class="btn btn-primary btn-block" type="submit"> Daftar </button>
-                        </div>
-                        <div class="separator mt-4"> ATAU </div>
-                        <div class="form-group mb-0 text-center mt-4">
-                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-google mr-2"></i> Daftar dengan
-                                Google </a>
-                        </div>
-                        <div class="form-group mb-0 text-center mt-4">
-                            <a class="btn btn-light btn-block" href="#"><i class="fab fa-facebook mr-2"></i> Daftar
-                                dengan Facebook </a>
-                        </div>
-                    </form>
-
+                    <div class="ml-1">
+                        <input
+                            class="shadow appearance-none border @if($errors->has('last_name')) border-red-500 @endif rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="lastname" type="text" placeholder="Nama Belakang" name="last_name">
+                        <p class="text-red-500 text-xs italic">{{$errors->first('last_name')}}</p>
+                    </div>
                 </div>
-            </div>
+                <div class="my-3">
+                    <input type="email" name="email"
+                        class="shadow appearance-none border @if($errors->has('email')) border-red-500 @endif rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Email">
+                    <p class="text-red-500 text-xs italic">{{$errors->first('email')}}</p>
+                </div>
+                <div class="my-3">
+                    <input type="password" name="password"
+                        class="shadow appearance-none border @if($errors->has('password')) border-red-500 @endif rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Password">
+                    <p class="text-red-500 text-xs italic">{{$errors->first('password')}}</p>
+                </div>
+                <div class="my-3">
+                    <input type="password" name="confirm_password"
+                        class="shadow appearance-none border @if($errors->has('confirm_password')) border-red-500 @endif rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Konfirmasi Password">
+                    <p class="text-red-500 text-xs italic">{{$errors->first('confirm_password')}}</p>
+                </div>
+                <div class="inline-flex my-2">
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input type="radio" class="form-radio" name="sex" value="M">
+                            <span class="ml-2 mr-4">Laki-Laki</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input type="radio" class="form-radio" name="sex" value="F">
+                            <span class="ml-2">Perempuan</span>
+                        </label>
+                    </div>
+                </div>
+                <p class="text-red-500 text-xs italic">{{$errors->first('sex')}}</p>
+                <div class="my-3">
+                    <input type="text" name="phone_number"
+                        class="shadow appearance-none border @if($errors->has('phone_number')) border-red-500 @endif rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="No Handphone">
+                    <p class="text-red-500 text-xs italic">{{$errors->first('phone_number')}}</p>
+                </div>
+                <div class="flex justify-center mt-10">
+                    <button type="submit"
+                        class="w-full bg-teal-500 rounded-lg text-white py-2 px-4 shadow-md hover:bg-teal-700">
+                        Sumbit
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <!-- end page -->

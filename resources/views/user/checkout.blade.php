@@ -97,7 +97,7 @@
                         <p class="has-text-weight-bold mt-4" id="total-pembayaran"></p>
                     </div>
                 </div>
-                <p><a href="#" class="button is-primary mt-4">Pilih Pembayaran</a></p>
+                <p><a href="/payment" class="button is-primary mt-4">Bayar</a></p>
                 <input type="number" name="weight" id="weight" value="{{$totalBerat}}" hidden>
             </div>
         </div>
