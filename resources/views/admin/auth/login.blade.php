@@ -24,6 +24,8 @@
 
     <!-- icons -->
     <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+
 
 </head>
 
@@ -150,12 +152,19 @@
 
     <!-- App js -->
     <script src="{{asset('backend/assets/js/app.min.js')}}"></script>
+
+    <!-- Sweet Alerts js -->
+    <script src="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="{{asset('backend/assets/js/pages/sweet-alerts.init.js')}}"></script>
+
     <script>
-        @if (Session::has('error'))
-            swal({
+        @if (Session::has('Error'))
+            Swal.fire({
                 title: "Error!",
-                text: "{{Session::get('error')}}",
-                icon: "error",
+                text: "{{Session::get('Error')}}",
+                type: "error",
                 button: "Close!",
             });
         @endif

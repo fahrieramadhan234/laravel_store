@@ -22,68 +22,69 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="card">
-                    <form role="form" action="/admin/product/update/{{$product->product_id}}" method="post"
-                        enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="modal-body">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="nim">Product Name</label><span class="text-danger">*</span>
-                                    <input name="product_name" type="text" class="form-control" id="name"
-                                        placeholder="Name" value="{{$product->product_name}}">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="card">
+                        <form role="form" action="/admin/product/update/{{$product->product_id}}" method="post"
+                            enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="nim">Product Name</label><span class="text-danger">*</span>
+                                        <input name="product_name" type="text" class="form-control" id="name"
+                                            placeholder="Name" value="{{$product->product_name}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Brand</label><span class="text-danger">*</span>
+                                        <select name="brand_id" class="form-control">
+                                            <option value="">--Brand--</option>
+                                            @foreach ($brands as $b)
+                                            <option @if($product->brands->brand_id == $b->brand_id) selected @endif
+                                                value="{{$b->brand_id}}"
+                                                >{{$b->brand_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Category</label><span class="text-danger">*</span>
+                                        <select name="category_id" class="form-control">
+                                            <option value="">--Category--</option>
+                                            @foreach ($categories as $c)
+                                            <option @if($product->categories->category_id == $c->category_id) selected
+                                                @endif
+                                                value="{{$c->category_id}}">{{$c->category_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">Price</label><span class="text-danger">*</span>
+                                        <input name="product_price" type="num" class="form-control" placeholder="Price"
+                                            value="{{$product->product_price}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">Stock</label><span class="text-danger">*</span>
+                                        <input name="product_stock" type="num" class="form-control" placeholder="Stock"
+                                            value="{{$product->product_stock}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">Description</label><span class="text-danger">*</span>
+                                        <textarea name="product_desc" cols="30" rows="10"
+                                            class="form-control">{{$product->product_desc}}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Pict</label>
+                                        <input name="product_pict" type="file" id="exampleInputFile"
+                                            class="form-control-file">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Brand</label><span class="text-danger">*</span>
-                                    <select name="brand_id" class="form-control">
-                                        <option value="">--Brand--</option>
-                                        @foreach ($brands as $b)
-                                        <option @if($product->brands->brand_id == $b->brand_id) selected @endif
-                                            value="{{$b->brand_id}}"
-                                            >{{$b->brand_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Category</label><span class="text-danger">*</span>
-                                    <select name="category_id" class="form-control">
-                                        <option value="">--Category--</option>
-                                        @foreach ($categories as $c)
-                                        <option @if($product->categories->category_id == $c->category_id) selected
-                                            @endif
-                                            value="{{$c->category_id}}">{{$c->category_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama">Price</label><span class="text-danger">*</span>
-                                    <input name="product_price" type="num" class="form-control" placeholder="Price"
-                                        value="{{$product->product_price}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama">Stock</label><span class="text-danger">*</span>
-                                    <input name="product_stock" type="num" class="form-control" placeholder="Stock"
-                                        value="{{$product->product_stock}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama">Description</label><span class="text-danger">*</span>
-                                    <textarea name="product_desc" cols="30" rows="10"
-                                        class="form-control">{{$product->product_desc}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Pict</label>
-                                    <input name="product_pict" type="file" id="exampleInputFile"
-                                        class="form-control-file">
-                                </div>
+                                <!-- /.box-body -->
                             </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

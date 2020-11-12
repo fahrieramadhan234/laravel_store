@@ -18,10 +18,10 @@ class AuthController extends Controller
         $password = $request->password;
         // dd($request->all());
 
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => 'admin'])) {
             return redirect('/admin/dashboard');
         }
-        return redirect('/admin/login')->with('error', 'Email atau password salah');
+        return redirect('/admin/login')->with('Error', 'Email atau password salah');
     }
 
     public function logout()

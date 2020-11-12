@@ -35,7 +35,7 @@ Route::get('/admin/login', 'AuthController@index')->name('login');
 Route::post('/admin/postlogin', 'AuthController@postlogin');
 Route::get('/admin/logout', 'AuthController@logout');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'checkRole']], function () {
     Route::get('/admin/dashboard', 'DashboardController@index');
     Route::get('/admin/products', 'ProductsController@index');
     Route::get('/admin/products/print_pdf', 'ProductsController@print_pdf');

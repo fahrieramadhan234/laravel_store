@@ -13,15 +13,14 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $address = Provinces::all();
-        // dd($address);
+        // $address = Provinces::all();
         $products = Products::all()->where('product_stock', '>', 0);
         if (Session::has('login')) {
             $account = Session::get('account');
             $cart = Session::get('cart');
             return view('user.index', ['products' => $products, 'account' => $account]);
         }
-
+        // echo "Hello";
         return view('user.index', ['products' => $products]);
     }
 
