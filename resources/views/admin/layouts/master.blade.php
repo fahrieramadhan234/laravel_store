@@ -34,7 +34,7 @@
     <!-- Sweet Alert-->
     <link href="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 
-    @yield('header')
+    @yield('css')
 
 </head>
 
@@ -91,7 +91,7 @@
     <!-- Sweet alert init js-->
     <script src="{{asset('backend/assets/js/pages/sweet-alerts.init.js')}}"></script>
 
-    @yield('footer')
+    @yield('javascript')
 
 </body>
 

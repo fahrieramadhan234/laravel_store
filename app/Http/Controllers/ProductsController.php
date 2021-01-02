@@ -8,8 +8,9 @@ use App\Models\Products;
 use App\Models\Brands;
 use App\Models\Categories;
 use App\Models\ProductPicture;
-use illuminate\Support\Facades\File;
 use PDF;
+use illuminate\Support\Facades\File;
+use Yajra\DataTables\DataTables;
 
 class ProductsController extends Controller
 {
@@ -55,21 +56,25 @@ class ProductsController extends Controller
         $product->save();
 
 
-        $product_pict = $request->file('product_pict');
-
-        // dd($product_pict);
-        foreach ($product_pict as $pro_pict) {
-            $product_picture = new \App\Models\ProductPicture;
-            $request->request->add(['product_id' => $product->product_id]);
-            $get_name = $pro_pict->getClientOriginalName();
-            $pict_name = time() . '-' . $get_name;
-            $pro_pict->move('backend/images/products_image/', $pict_name);
-            $product_picture->product_pict = $pict_name;
-            $product_picture->product_id = $request->product_id;
-            $product_picture->save();
+        
+        
+        if($request->hasFile('product_pict')) {
+            // dd($product_pict);
+            $product_pict = $request->file('product_pict');
+            foreach ($product_pict as $pro_pict) {
+                $product_picture = new \App\Models\ProductPicture;
+                $request->request->add(['product_id' => $product->product_id]);
+                $get_name = $pro_pict->getClientOriginalName();
+                $pict_name = time() . '-' . $get_name;
+                $pro_pict->move('backend/images/products_image/', $pict_name);
+                $product_picture->product_pict = $pict_name;
+                $product_picture->product_id = $request->product_id;
+                $product_picture->save();
+            }
         }
+        
 
-        return redirect('/admin/products')->with('Success', 'Product has been added');
+        return redirect('/admin/product')->with('Success', 'Product has been added');
     }
 
     public function edit($id)
@@ -97,7 +102,7 @@ class ProductsController extends Controller
             $product->save();
         }
 
-        return redirect('/admin/products')->with('Success', 'Product has been updated');
+        return redirect('/admin/product')->with('Success', 'Product has been updated');
     }
 
 
@@ -118,7 +123,7 @@ class ProductsController extends Controller
         $product_picture->delete();
         $product->delete();
 
-        return redirect('/admin/products')->with('Success', 'Product has been deleted');
+        return redirect('/admin/product')->with('Success', 'Product has been deleted');
     }
 
     public function detail($id)
@@ -138,11 +143,65 @@ class ProductsController extends Controller
         return view('admin.products.detail', ['product' => $product, 'stock' => $stock, 'picture_name' => $picture_name]);
     }
 
+    public function data(Request $request)
+    {
+
+        $brand_id = $request->brand_id != null ? $request->brand_id : null;
+        $category_id = $request->category_id != null ? $request->category_id : null;
+        $start_price = $request->start_price ?? null;
+        $end_price = $request->end_price ?? null;
+        
+
+        $data = Products::select(
+            'product_id as id',
+            'product_name as name',
+            'product_price as price',
+            'product_stock as stock',
+            'brands.brand_name as brand',
+            'categories.category_name as category',
+        )
+        ->join('brands', 'brands.brand_id', 'products.brand_id')
+        ->join('categories', 'categories.category_id', 'products.category_id')
+        ->when( isset($brand_id) != null,
+            function($q) use ($brand_id){
+                $q->where('brands.brand_id', '=', $brand_id);
+            }
+        )
+        ->when( isset($category_id) != null,
+            function($q) use ($category_id){
+                $q->where('categories.category_id', '=', $category_id);
+            }
+        )
+        ->when( isset($start_price) != null,
+            function($q) use ($start_price){
+                $q->where('products.product_price', '>=', $start_price);
+            }
+        )
+        ->when( isset($end_price) != null,
+            function($q) use ($end_price){
+                $q->where('products.product_price', '<=', $end_price);
+            }
+        )
+        ->get();
+
+        // return response()->json(['data' => $request->all()], 200);
+
+        return DataTables::of($data)
+            ->editColumn(
+                'price',
+                function($q) {
+                    return "Rp." . number_format($q->price);
+                }
+            )
+            ->addIndexColumn()
+            ->toJson();
+    }
+
     public function print_pdf()
     {
         $products = Products::all();
 
-        $pdf = PDF::loadview('admin.products.products_pdf', ['products' => $products]);
+        $pdf = PDF::loadview('admin.product.products_pdf', ['products' => $products]);
         return $pdf->download(date("l jS \of F Y h:i:s A ") . 'products-report.pdf');
     }
 }

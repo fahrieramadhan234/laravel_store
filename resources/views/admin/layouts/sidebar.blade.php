@@ -5,7 +5,7 @@
             <ul id="side-menu">
                 <li class="menu-title">Navigation</li>
                 <li>
-                    <a href="/admin/dashboard">
+                    <a href="{{ route('admin.dashboard') }}">
                         <i data-feather="airplay"></i>
                         <span> Dashboards </span>
                     </a>
@@ -21,17 +21,17 @@
                     <div class="collapse" id="sidebarMultilevel">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="/admin/products">
+                                <a href="{{route('admin.product')}}">
                                     Data Products
                                 </a>
                             </li>
                             <li>
-                                <a href="/admin/brands">
+                                <a href="{{ route('admin.brand') }}">
                                     Data Brands
                                 </a>
                             </li>
                             <li>
-                                <a href="/admin/categories">
+                                <a href="{{ route('admin.category') }}">
                                     Data Categories
                                 </a>
                             </li>
@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/admin/customer">
+                    <a href="{{ route('admin.customer') }}">
                         <i data-feather="users"></i>
                         <span>Customers</span>
                     </a>

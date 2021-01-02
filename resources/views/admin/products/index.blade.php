@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('header')
+@section('css')
 <link href="{{asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"
     type="text/css" />
 <link href="{{asset('backend/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}"
@@ -35,6 +35,54 @@
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-lg-8">
+                                    <h3 class="box-title">Filter</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="">Brand</label>
+                                        <select name="brand_filter" id="brand_filter" class="form-control">
+                                            <option value="">-- Select --</option>
+                                                @foreach ($brands as $b)
+                                                <option value="{{$b->brand_id}}" @if (old('brand_id')==$b->brand_id) selected
+                                                    @endif>{{$b->brand_name}} </option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Category</label>
+                                        <select name="category_filter" id="category_filter" class="form-control select2">
+                                            <option value="">-- Select --</option>
+                                                @foreach ($categories as $c)
+                                                <option value="{{$c->category_id}}" @if (old('category_id')==$c->category_id) selected
+                                                    @endif>{{$c->category_name}}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Start Price</label>
+                                        <input type="number" name="start_price" id="start_price" class="form-control money">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Endt Price</label>
+                                        <input type="number" name="end_price" id="end_price" class="form-control money">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="button" onClick="submit()">Filter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div><!-- end col-->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-lg-8">
                                     <h3 class="box-title">Data Products</h3>
                                 </div>
                                 <div class="col-lg-4">
@@ -42,14 +90,18 @@
                                         <div class="dt-buttons btn-group flex-wrap mr-2">
                                             <button class="btn btn-secondary buttons-copy buttons-html5 btn-light"
                                                 tabindex="0" aria-controls="datatable-buttons"
-                                                type="button"><span>Copy</span></button>
+                                                type="button">
+                                                <span>Copy</span>
+                                            </button>
                                             <a href="#" onclick="print()"
-                                                class="btn btn-secondary buttons-print btn-light" tabindex="0"
-                                                aria-controls="datatable-buttons" type="button"><span>Print</span></a>
+                                                class="btn btn-secondary buttons-print btn-light" type="button">
+                                                <span>Print</span>
+                                            </a>
                                             <a href="/admin/products/print_pdf"
-                                                class="btn btn-secondary buttons-pdf buttons-html5 btn-light"
-                                                tabindex="0" aria-controls="datatable-buttons"
-                                                type="button"><span>PDF</span></a> </div>
+                                                class="btn btn-secondary buttons-pdf btn-light"
+                                                type="button"><span>PDF</span>
+                                            </a> 
+                                        </div>
                                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i
                                                 class="mdi mdi-plus-circle mr-1"></i>Add
                                             Data</a>
@@ -59,72 +111,20 @@
                             <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="datatable-buttons_wrapper"
+                                        <table id="table-product"
                                             class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
                                             role="grid" aria-describedby="basic-datatable_info" style="width: 1561px;">
                                             <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Rendering engine: activate to sort column descending"
-                                                        style="width: 30px;">No</th>
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Rendering engine: activate to sort column descending"
-                                                        style="width: 300px;">Product Name</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Browser: activate to sort column ascending"
-                                                        style="width: 246px;">Brand</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Browser: activate to sort column ascending"
-                                                        style="width: 246px;">Category</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Platform(s): activate to sort column ascending"
-                                                        style="width: 219px;">Price</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Engine version: activate to sort column ascending"
-                                                        style="width: 172px;">Stock</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="CSS grade: activate to sort column ascending"
-                                                        style="width: 125px;">Aksi</th>
+                                                    <th>#</th>
+                                                    <th>Product Name</th>
+                                                    <th>Brand</th>
+                                                    <th>Category</th>
+                                                    <th>Price</th>
+                                                    <th>Stock</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @php $no=1 @endphp
-                                                @foreach ($products as $p)
-                                                <tr role="row" class="odd">
-                                                    <td>{{ $no++ }}</td>
-                                                    <td><a href="/admin/product/detail/{{$p->product_id}}">{{$p->product_name}}
-                                                        </a>
-                                                    </td>
-                                                    <td>{{$p->brands->brand_name}}</td>
-                                                    <td>{{$p->categories->category_name}}</td>
-                                                    <td>Rp. {{number_format($p->product_price)}}</td>
-                                                    <td>
-                                                        @if ($p->product_stock >= 11)
-                                                        <span class="badge bg-soft-success text-success">In Stock</span>
-                                                        @elseif ($p->product_stock > 0 && $p->product_stock <= 10) <span
-                                                            class="badge bg-soft-warning text-warning">Limited</span>
-                                                            @else
-                                                            <span class="badge bg-soft-danger text-danger">Out of
-                                                                Stock</span>
-                                                            @endif
-                                                    </td>
-                                                    <td>
-                                                        <a href="/admin/product/edit/{{$p->product_id}}"
-                                                            class="btn btn-warning btn-sm">Edit</a>
-                                                        <a href="#" class="btn btn-danger btn-sm delete"
-                                                            product-id="{{$p->product_id}}"
-                                                            product-name="{{$p->product_name}}">Delete</a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
                 <h4 class="modal-title" id="standard-modalLabel">Modal Heading</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form role="form" action="/admin/product/create" method="post" enctype="multipart/form-data">
+            <form role="form" action="{{route('admin.product.create')}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="box-body">
@@ -251,7 +251,7 @@
 
 @endsection
 
-@section('footer')
+@section('javascript')
 <script src="{{asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('backend/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
@@ -278,12 +278,66 @@
         });
     @endif
 </script>
-<script>
-    $(document).ready( function () {
-        $('.delete').click(function(){
-            const id = $(this).attr('product-id');
-            const name = $(this).attr('product-name');
-            Swal.fire({
+<script type="text/javascript">
+    var table = null;
+
+    (function(){
+        loadTable();
+    })();
+
+    function loadTable() {
+        table = $('#table-product').DataTable({
+            scrollX: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url : '{{route("admin.product.data")}}',
+                method: 'GET',
+                data: function(value) {
+                    value.brand_id = $('#brand_filter').val();
+                    value.category_id = $('#category_filter').val();
+                    value.start_price = $('#start_price').val();
+                    value.end_price = $('#end_price').val();
+                },
+            },
+            columns: [
+                { data: 'DT_RowIndex', name: 'no', sorting: false},
+                { data: 'name', name: 'name'},
+                { data: 'brand', name: 'brand'},
+                { data: 'category', name: 'category'},
+                { data: 'price', name: 'price'},
+                { data: 'stock', name: 'stock', render: function(data){
+                    if(data >= 10){
+                        return '<span class="badge badge-soft-success text-success">In Stock</span>'
+                    }else if(data > 0 && data <= 10){
+                        return '<span class="badge badge-soft-warning text-warning">Limited</span>'
+                    }else if(data == 0) {
+                        return '<span class="badge badge-soft-danger text-danger">Out of Stock</span>'
+                    }
+                }},
+                { data: 'id', name: 'id', render: function(data){
+                    let url = '{{url("/admin/product")}}'
+                    return '<div class="btn-group">' +
+                    '<a class="btn btn-sm btn-info" href="' + url +'/detail/' + data +'"><i class="mdi mdi-eye" style="color: white"></i></a>' +
+                    '<a class="btn btn-sm btn-warning" href="' + url +'/edit/' + data +'"><i class="mdi mdi-pencil" style="color: white"></i></a>' +
+                    '<a class="btn btn-sm btn-danger delete" href="#" onClick="deleteConfirm(' + data + ')"><i class="mdi mdi-delete" style="color: white"></i></a>' +
+                    '</div>';
+
+                }}
+            ]
+        });
+    }
+
+    function drawTable(){
+        table.draw();
+    }
+
+    function submit() {
+        drawTable();
+    }
+
+    function deleteConfirm(id) {
+        Swal.fire({
                 title: 'Are you sure?',
                 text: "Are you sure want to delete this product ?",
                 type: 'warning',
@@ -294,11 +348,31 @@
             })
             .then((result) => {
                 if (result.value) {
-                    window.location = "/admin/product/delete/"+id;
+                    window.location ="/admin/product/delete/"+id ;
                 }
             })
-        });
-        $('#datatable-buttons_wrapper').DataTable();
+    }
+
+</script>
+<script>
+    $(document).ready( function () {
+        // $('.delete').click(function(){
+        //     const id = $(this).attr('product-id');
+        //     Swal.fire({
+        //         title: 'Are you sure?',
+        //         text: "Are you sure want to delete this product ?",
+        //         type: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes, delete it!'
+        //     })
+        //     .then((result) => {
+        //         if (result.value) {
+        //             window.location ="/admin/product/delete/"+id ;
+        //         }
+        //     })
+        // });
         $('.datepicker').datepicker({
             autoclose: true,
             format:'yyyy-mm-dd'

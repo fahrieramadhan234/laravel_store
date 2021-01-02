@@ -31,35 +31,90 @@ Route::get('/checkout/payment', 'CheckoutController@payment')->name('checkout_pa
 Route::post('/checkout/add_address', 'CheckoutController@add_address');
 Route::get('/checkout_delete_session', 'CheckoutController@delete_session');
 
-Route::get('/admin/login', 'AuthController@index')->name('login');
-Route::post('/admin/postlogin', 'AuthController@postlogin');
-Route::get('/admin/logout', 'AuthController@logout');
-
-Route::group(['middleware' => ['auth', 'checkRole']], function () {
-    Route::get('/admin/dashboard', 'DashboardController@index');
-    Route::get('/admin/products', 'ProductsController@index');
-    Route::get('/admin/products/print_pdf', 'ProductsController@print_pdf');
-    Route::post('/admin/product/create', 'ProductsController@create');
-    Route::get('/admin/product/edit/{id}', 'ProductsController@edit');
-    Route::post('/admin/product/update/{id}', 'ProductsController@update');
-    Route::get('/admin/product/delete/{id}', 'ProductsController@delete');
-    Route::get('/admin/product/detail/{id}', 'ProductsController@detail');
-
-    Route::get('/admin/brands', 'BrandsController@index');
-    Route::post('/admin/brand/create', 'BrandsController@create');
-    Route::get('/admin/brand/edit/{id}', 'BrandsController@edit');
-    Route::post('/admin/brand/update/{id}', 'BrandsController@update');
-    Route::get('/admin/brand/delete/{id}', 'BrandsController@delete');
-
-    Route::get('/admin/categories', 'CategoriesController@index');
-    Route::post('/admin/categories/create', 'CategoriesController@create');
-    Route::post('/admin/categories/edit/{id}', 'CategoriesController@edit');
-    Route::get('/admin/categories/delete/{id}', 'CategoriesController@delete');
-
-    Route::get('/admin/customer', 'CustomerController@index');
-    Route::post('/admin/customer/create', 'CustomerController@create');
-    Route::get('/admin/customer/edit/{id}', 'CustomerController@edit');
-    Route::get('/admin/customer/delete/{id}', 'CustomerController@delete');
-    Route::post('/admin/customer/update/{id}', 'CustomerController@update');
-    Route::get('/admin/customer/profile/{id}', 'CustomerController@profile');
-});
+Route::group(
+    [
+        'prefix' => 'admin'
+    ],
+    function() {
+        Route::get('login', 'AuthController@index')
+            ->name('login');
+        Route::post('postlogin', 'AuthController@postlogin');
+        Route::get('logout', 'AuthController@logout');
+        Route::group(
+            [
+                'middleware' => ['auth', 'checkRole']
+            ],
+            function() {
+                Route::group(
+                    [
+                        'prefix' => 'dashboard'
+                    ],
+                    function() {
+                        Route::get('', 'DashboardController@index')
+                            ->name('admin.dashboard');
+                    }
+                );
+                Route::group(
+                    [
+                        'prefix' => 'product'
+                    ],
+                    function(){
+                        Route::get('', 'ProductsController@index')
+                            ->name('admin.product');
+                        Route::post('create', 'ProductsController@create')
+                            ->name('admin.product.create');
+                        Route::get('edit/{id}', 'ProductsController@edit')
+                            ->name('admin.product.edit');
+                        Route::post('update/{id}', 'ProductsController@update');
+                        Route::get('delete/{id}', 'ProductsController@delete')
+                            ->name('admin.product.delete');
+                        Route::get('detail/{id}', 'ProductsController@detail')
+                            ->name('admin.product.detail');
+                        Route::get('print_pdf', 'ProductsController@print_pdf');
+                        Route::get('data', 'ProductsController@data')
+                            ->name('admin.product.data');
+                    }
+                );
+                Route::group(
+                    [
+                        'prefix' => 'brand'
+                    ],
+                    function(){
+                        Route::get('', 'BrandsController@index')
+                            ->name('admin.brand');
+                        Route::post('create', 'BrandsController@create');
+                        Route::get('edit/{id}', 'BrandsController@edit');
+                        Route::post('update/{id}', 'BrandsController@update');
+                        Route::get('delete/{id}', 'BrandsController@delete');
+                    }
+                );
+                Route::group(
+                    [
+                        'prefix' => 'category'
+                    ],
+                    function(){
+                        Route::get('', 'CategoriesController@index')
+                            ->name('admin.category');
+                        Route::post('create', 'CategoriesController@create');
+                        Route::post('edit/{id}', 'CategoriesController@edit');
+                        Route::get('delete/{id}', 'CategoriesController@delete');
+                    }
+                );
+                Route::group(
+                    [
+                        'prefix' => 'customer'
+                    ],
+                    function(){
+                        Route::get('', 'CustomerController@index')
+                            ->name('admin.customer');
+                        Route::post('create', 'CustomerController@create');
+                        Route::get('edit/{id}', 'CustomerController@edit');
+                        Route::get('delete/{id}', 'CustomerController@delete');
+                        Route::post('update/{id}', 'CustomerController@update');
+                        Route::get('profile/{id}', 'CustomerController@profile');
+                    }
+                );
+            }
+        );
+    }
+);
