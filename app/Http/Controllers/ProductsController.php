@@ -150,6 +150,7 @@ class ProductsController extends Controller
         $category_id = $request->category_id != null ? $request->category_id : null;
         $start_price = $request->start_price ?? null;
         $end_price = $request->end_price ?? null;
+        $stock = $request->stock ?? null;
         
 
         $data = Products::select(
@@ -180,6 +181,24 @@ class ProductsController extends Controller
         ->when( isset($end_price) != null,
             function($q) use ($end_price){
                 $q->where('products.product_price', '<=', $end_price);
+            }
+        )
+        ->when( isset($stock) != null && $stock == 'in_stock',
+            function($q) use ($stock){
+                $q->where('products.product_stock', '>=', 10);
+            }
+        )
+        ->when( isset($stock) != null && $stock == 'limited',
+            function($q) use ($stock){
+                $q->where([
+                    ['products.product_stock', '>', 0],
+                    ['products.product_stock', '<', 10]
+                ]);
+            }
+        )
+        ->when( isset($stock) != null && $stock == 'out_of_stock',
+            function($q) use ($stock){
+                $q->where('products.product_stock', '=', 0);
             }
         )
         ->get();

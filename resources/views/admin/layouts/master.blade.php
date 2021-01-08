@@ -3,94 +3,96 @@
 
 <head>
 
-    <meta charset="utf-8" />
-    <title>Dashboard | UBold - Responsive Admin Dashboard Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Plugins css -->
-    <link href="{{asset('backend/assets/libs/flatpickr/flatpickr.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/libs/selectize/css/selectize.bootstrap3.css')}}" rel="stylesheet"
-        type="text/css" />
+    <title>SB Admin 2 - Blank</title>
 
-    <!-- App css -->
-    <link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"
-        id="bs-default-stylesheet" />
-    <link href="{{asset('backend/assets/css/app.min.css')}}" rel="stylesheet" type="text/css"
-        id="app-default-stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="{{asset('assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-    <link href="{{asset('backend/assets/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css"
-        id="bs-dark-stylesheet" disabled />
-    <link href="{{asset('backend/assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css"
-        id="app-dark-stylesheet" disabled />
-
-    <!-- icons -->
-    <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-
-    <!-- Sweet Alert-->
-    <link href="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
-
+    <!-- Custom styles for this template-->
+    <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
     @yield('css')
 
 </head>
 
-<body
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "dark", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": false}'>
+<body id="page-top">
 
-    <!-- Begin page -->
+    <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Topbar Start -->
-        @include('admin.layouts.navbar')
-        <!-- end Topbar -->
-
-        <!-- ========== Left Sidebar Start ========== -->
+        <!-- Sidebar -->
         @include('admin.layouts.sidebar')
-        <!-- Left Sidebar End -->
+        <!-- End of Sidebar -->
 
-        <!-- ============================================================== -->
-        <!-- Start Page Content here -->
-        <!-- ============================================================== -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-        @yield('content')
+            <!-- Main Content -->
+            <div id="content">
 
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
+                <!-- Topbar -->
+                @include('admin.layouts.navbar')
+                <!-- End of Topbar -->
 
-        @include('admin.layouts.footer')
+                <!-- Begin Page Content -->
+                @yield('content')
+                <!-- /.container-fluid -->
 
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            @include('admin.layouts.footer')
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- END wrapper -->
+    <!-- End of Page Wrapper -->
 
-    <!-- Right Sidebar -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-    <!-- /Right-bar -->
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <!-- Vendor js -->
-    <script src="{{asset('backend/assets/js/vendor.min.js')}}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('assets/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
-    <script src="{{asset('backend/assets/libs/selectize/js/standalone/selectize.min.js')}}"></script>
-
-    <!-- Dashboar 1 init js-->
-    <script src="{{asset('backend/assets/js/pages/dashboard-1.init.js')}}"></script>
-
-    <!-- App js-->
-    <script src="{{asset('backend/assets/js/app.min.js')}}"></script>
-    <!-- Sweet Alerts js -->
-    <script src="{{asset('backend/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
-
-    <!-- Sweet alert init js-->
-    <script src="{{asset('backend/assets/js/pages/sweet-alerts.init.js')}}"></script>
-
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
     @yield('javascript')
 
 </body>
