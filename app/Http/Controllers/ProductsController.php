@@ -10,7 +10,9 @@ use App\Models\Categories;
 use App\Models\ProductPicture;
 use PDF;
 use illuminate\Support\Facades\File;
+use Milon\Barcode\DNS1D;
 use Yajra\DataTables\DataTables;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class ProductsController extends Controller
 {
@@ -27,8 +29,6 @@ class ProductsController extends Controller
     //Input new product to database
     public function create(Request $request)
     {
-
-        // dd($product_pict);
 
         $message = [
             'required' => 'This field is required',
@@ -55,7 +55,10 @@ class ProductsController extends Controller
         $product->product_desc = $request->product_desc;
         $product->save();
 
-
+        
+        $generator = new BarcodeGeneratorPNG();
+        $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($product, $generator::TYPE_CODE_128)) . '" >';
+        $product->update(['barcode' => $barcode]);
         
         
         if($request->hasFile('product_pict')) {
@@ -160,6 +163,7 @@ class ProductsController extends Controller
             'product_stock as stock',
             'brands.brand_name as brand',
             'categories.category_name as category',
+            'barcode as barcode'
         )
         ->join('brands', 'brands.brand_id', 'products.brand_id')
         ->join('categories', 'categories.category_id', 'products.category_id')

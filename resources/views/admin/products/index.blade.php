@@ -1,10 +1,5 @@
 @extends('admin.layouts.master')
 
-@section('css')
-    <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/select2/css/select2.min.css')}}" rel="stylesheet">
-@endsection
-
 @section('content')
 <div class="container-fluid">
     <div class="card shadow mb-4">
@@ -83,6 +78,7 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Stock</th>
+                            <th>Barcode</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -207,10 +203,6 @@
 @endsection
 
 @section('javascript')
-    <script src="{{asset('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
-    <script src="{{asset('assets/vendor/select2/js/select2.min.js')}}"></script>
     <script>
 
         var table = null;
@@ -222,7 +214,7 @@
 
         function loadTable() {
             table = $('#table-product').DataTable({
-                scrollX: true,
+                // scrollX: true,
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -250,6 +242,9 @@
                         }else if(data == 0) {
                             return '<span class="badge text-danger">Out of Stock</span>'
                         }
+                    }},
+                    { data: 'barcode', name: 'barcode', render: function(data) {
+                        return "awa"
                     }},
                     { data: 'id', name: 'id', render: function(data){
                         let url = '{{url("/admin/product")}}'

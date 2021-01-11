@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/select2/css/select2.min.css')}}" rel="stylesheet">
     @yield('css')
 
 </head>
@@ -93,6 +95,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
+    <script src="{{asset('assets/vendor/select2/js/select2.min.js')}}"></script>
     @yield('javascript')
 
 </body>

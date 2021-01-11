@@ -17,6 +17,7 @@ class Products extends Model
         'product_stock',
         'product_desc',
         'product_pict',
+        'barcode'
     ];
 
     public function brands()
